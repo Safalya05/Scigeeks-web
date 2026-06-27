@@ -40,7 +40,7 @@
     /* Custom transitions */
     .fade-enter { opacity: 0; transform: translateY(20px); }
     .fade-enter-active { opacity: 1; transform: translateY(0); transition: all 0.3s ease-out; }
-    /* Timeline styles (from About.module.css) */
+    /* Timeline styles */
     .timeline { position: relative; display: flex; flex-direction: column; gap: 3rem; }
     .timeline::before { content: ""; position: absolute; top: 0; left: 28px; width: 2px; height: 100%; background-color: #cbd5e1; z-index: 0; }
     .dark .timeline::before { background-color: #475569; }
@@ -69,6 +69,49 @@
     /* Transitions for pages */
     .page-transition { animation: fadeIn 0.3s ease-out; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    /* Floating WhatsApp Button */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      z-index: 999;
+      background-color: #25d366;
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 32px;
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+    }
+    .whatsapp-float svg {
+      width: 36px;
+      height: 36px;
+    }
+    @media (max-width: 640px) {
+      .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        font-size: 26px;
+        bottom: 20px;
+        left: 20px;
+      }
+    }
+    /* Course card tag styles */
+    .tag-live { background-color: #dc2626; color: white; }
+    .tag-tests { background-color: #2563eb; color: white; }
+    .tag-videos { background-color: #16a34a; color: white; }
+    .tag-files { background-color: #ca8a04; color: white; }
+    .tag-free { background-color: #9333ea; color: white; }
   </style>
 </head>
 <body>
@@ -172,15 +215,36 @@
             </ul>
           </div>
           <div><h4 class="font-semibold text-white mb-4">Find Us on Map</h4>
-            <div class="rounded-lg overflow-hidden h-40 bg-gray-700 flex items-center justify-center text-slate-400 text-sm">Map placeholder</div>
+            <div class="rounded-lg overflow-hidden h-40">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d230.16031896163383!2d88.48767786377253!3d22.63270983076343!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f8a16dcb7e0339%3A0xcc59f74af624007!2sAnandamela!5e0!3m2!1sen!2sin!4v1768394292792!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
+                style="border: 0;"
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
           </div>
         </div>
-        <div class="mt-12 pt-8 border-t border-gray-700 flex flex-col sm:flex-row justify-between items-center">
-          <p class="text-sm text-slate-300">&copy; 2025 SciGeeks. All Rights Reserved. <button id="legalPolicyBtn" class="underline hover:text-white text-sm">Privacy Policy & Terms</button></p>
-          <div class="flex space-x-4 mt-4 sm:mt-0">
-            <a href="#" class="text-slate-500 hover:text-white">📘</a>
-            <a href="#" class="text-slate-500 hover:text-white">📷</a>
-            <a href="#" class="text-slate-500 hover:text-white">🔗</a>
+        <div class="mt-12 pt-8 border-t border-gray-700 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p class="text-sm text-slate-300 text-center sm:text-left">
+            &copy; 2026 SciGeeks. All Rights Reserved. 
+            <button id="legalPolicyBtn" class="underline hover:text-white text-sm">Privacy Policy &amp; Terms</button>
+            <br />
+            Managed by <a href="https://graphitite.com" target="_blank" class="underline hover:text-white">Graphitite.</a>
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" target="_blank" class="text-slate-400 hover:text-white transition-colors" aria-label="Facebook">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/yourscigeeks" target="_blank" class="text-slate-400 hover:text-white transition-colors" aria-label="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/company/geeksforscience" target="_blank" class="text-slate-400 hover:text-white transition-colors" aria-label="LinkedIn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
           </div>
         </div>
       </div>
@@ -190,24 +254,35 @@
     <div id="legalModal" class="fixed inset-0 z-50 bg-black/60 flex items-center justify-center px-4 hidden">
       <div class="w-full max-w-4xl max-h-[80vh] bg-white dark:bg-slate-900 rounded-lg shadow-xl flex flex-col">
         <div class="flex items-center justify-between px-6 py-4 border-b dark:border-slate-700">
-          <h2 class="text-lg font-semibold text-slate-800 dark:text-slate-100">Privacy Policy & Terms of Use</h2>
+          <h2 class="text-lg font-semibold text-slate-800 dark:text-slate-100">Privacy Policy &amp; Terms of Use</h2>
           <button id="closeLegalModal" class="text-slate-500 hover:text-slate-800 dark:hover:text-white text-2xl">&times;</button>
         </div>
         <div class="px-6 py-5 overflow-y-auto text-sm text-slate-600 dark:text-slate-300 space-y-6 leading-relaxed">
-          <section><h3 class="text-base font-semibold text-slate-800 dark:text-slate-100">Privacy Policy</h3><p>SciGeeks respects your privacy...</p></section>
-          <section><h4 class="font-semibold">Information We Collect</h4><p>We may collect personal information...</p></section>
-          <section><h4 class="font-semibold">Use of Information</h4><p>Collected data is used to provide educational services...</p></section>
-          <section><h4 class="font-semibold">Analytics & Cookies</h4><p>We use analytics tools...</p></section>
-          <section><h4 class="font-semibold">Data Security</h4><p>Reasonable safeguards are applied...</p></section>
-          <section class="pt-4 border-t dark:border-slate-700"><h3 class="text-base font-semibold text-slate-800 dark:text-slate-100">Terms & Conditions</h3><p>By using SciGeeks, you agree...</p></section>
-          <section><h4 class="font-semibold">Platform Purpose</h4><p>SciGeeks is an educational platform...</p></section>
-          <section><h4 class="font-semibold">User Responsibilities</h4><p>Users must not misuse...</p></section>
-          <section><h4 class="font-semibold">Intellectual Property</h4><p>All content is the property...</p></section>
-          <section><h4 class="font-semibold">Limitation of Liability</h4><p>SciGeeks shall not be liable...</p></section>
-          <section><h4 class="font-semibold">Governing Law</h4><p>These terms are governed by the laws of India...</p></section>
+          <section><h3 class="text-base font-semibold text-slate-800 dark:text-slate-100">Privacy Policy</h3><p>SciGeeks respects your privacy and is committed to protecting the information you share with us. This policy explains how information is collected, used, and safeguarded when you use the SciGeeks platform.</p></section>
+          <section><h4 class="font-semibold">Information We Collect</h4><p>We may collect personal information such as name and email address when you create an account. Non-personal data like device type, browser information, pages visited, and session duration may also be collected.</p></section>
+          <section><h4 class="font-semibold">Use of Information</h4><p>Collected data is used to provide educational services, personalize learning, improve platform performance, and maintain security. SciGeeks does not sell personal data.</p></section>
+          <section><h4 class="font-semibold">Analytics &amp; Cookies</h4><p>We use analytics tools such as Google Analytics to understand platform usage. Cookies may be used for session continuity and advertising through services like Google AdSense.</p></section>
+          <section><h4 class="font-semibold">Data Security</h4><p>Reasonable safeguards are applied to protect your data. However, no online system can guarantee absolute security.</p></section>
+          <section class="pt-4 border-t dark:border-slate-700"><h3 class="text-base font-semibold text-slate-800 dark:text-slate-100">Terms &amp; Conditions</h3><p>By using SciGeeks, you agree to comply with these terms. If you do not agree, please discontinue use of the platform.</p></section>
+          <section><h4 class="font-semibold">Platform Purpose</h4><p>SciGeeks is an educational platform focused on science learning, assessments, and academic guidance.</p></section>
+          <section><h4 class="font-semibold">User Responsibilities</h4><p>Users must not misuse the platform, attempt unauthorized access, or engage in academic dishonesty.</p></section>
+          <section><h4 class="font-semibold">Intellectual Property</h4><p>All content on SciGeeks is the intellectual property of the platform unless stated otherwise.</p></section>
+          <section><h4 class="font-semibold">Limitation of Liability</h4><p>SciGeeks shall not be liable for damages arising from use of the platform.</p></section>
+          <section><h4 class="font-semibold">Governing Law</h4><p>These terms are governed by the laws of India, with jurisdiction in West Bengal.</p></section>
         </div>
       </div>
     </div>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/918420805149?text=Hello!%20I%20would%20like%20to%20know%20more%20about%20SciGeeks%20courses." 
+       target="_blank" 
+       rel="noopener noreferrer"
+       class="whatsapp-float"
+       aria-label="Chat on WhatsApp">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+    </a>
   </div>
 
   <script>
@@ -231,12 +306,114 @@
         { name: "IISER", logo: "iiser.jpg" },
         { name: "IISc", logo: "IISC-Bangalore-scaled.jpg" }
       ],
-      // Courses
+      // Updated Courses from screenshots
       courses: [
-        { id: 1, title: 'ISI B.Stat/B.Math Preparation', category: 'ug-pg-entrance', courseType: 'live', duration: '6 months', students: '150+', modules: 4, description: 'Comprehensive preparation for ISI entrance exams.', price: '₹25,000', discountedPrice: '₹22,500', image: 'https://placehold.co/600x400/e2e8f0/475569?text=ISI+Prep', featured: true, recent: false, tags: ['live class', 'tests'], link: '#' },
-        { id: 2, title: 'NEST & IAT Commander', category: 'ug-pg-entrance', courseType: 'recorded', duration: '4 months', students: '200+', modules: 5, description: 'Complete course for NEST and IAT.', price: '₹20,000', discountedPrice: '₹18,000', image: 'https://placehold.co/600x400/e2e8f0/475569?text=NEST/IAT', featured: false, recent: true, tags: ['videos', 'files'], link: '#' },
-        { id: 3, title: 'IIT JAM Physics', category: 'ug-pg-entrance', courseType: 'live', duration: '8 months', students: '100+', modules: 6, description: 'Intensive preparation for IIT JAM Physics.', price: '₹30,000', discountedPrice: '₹27,000', image: 'https://placehold.co/600x400/e2e8f0/475569?text=IIT+JAM', featured: true, recent: false, tags: ['live class', 'tests', 'videos'], link: '#' },
-        { id: 4, title: 'Advanced Research Methodology', category: 'research-methods', courseType: 'recorded', duration: '3 months', students: '50+', modules: 4, description: 'Advanced course on scientific research methods.', price: '₹15,000', discountedPrice: '₹13,500', image: 'https://placehold.co/600x400/e2e8f0/475569?text=Research', featured: false, recent: false, tags: ['free content'], link: '#' }
+        { 
+          id: 1, 
+          title: 'UDAAN 2026 - Monthly Explorer', 
+          category: 'ug-pg-entrance', 
+          courseType: 'live', 
+          description: 'Best IAT, NEST, JEE, NEET, and other competitive exams 2026 Course. Specializing for IAT & NEST. Expert Mentors from IISC, IISERs. Interactive App based learning with live & recorded classes. SciGeeks Ebook with crisp theory & question bank. Extensive practice with chapter-wise PYQs & mock tests. Doubt support with weekly sessions & 24x7 Telegram group. Scientist interactions, daily challenges, prizes, stress busters & strategy sessions.',
+          price: '₹2,999', 
+          discountedPrice: '₹3,999+', 
+          image: 'https://placehold.co/600x400/1e293b/ffffff?text=UDAAN+2026', 
+          featured: true, 
+          recent: true, 
+          tags: ['live class', 'tests', 'videos'], 
+          link: '#',
+          startDate: 'Started from June 2025'
+        },
+        { 
+          id: 2, 
+          title: 'SciGeeks - IAT & NEST Prep Book', 
+          category: 'ug-pg-entrance', 
+          courseType: 'recorded', 
+          description: 'Comprehensive Coverage: Complete IAT & NEST syllabus. Crisp Theory for quick understanding. Practice Questions with topic-wise questions and detailed solutions.',
+          price: '₹8,999', 
+          discountedPrice: '₹9,999+', 
+          image: 'https://placehold.co/600x400/1e293b/ffffff?text=IAT+NEST+Book', 
+          featured: false, 
+          recent: false, 
+          tags: ['files'], 
+          link: '#',
+          startDate: 'Available from August 2025'
+        },
+        { 
+          id: 3, 
+          title: 'SciGeeks - IAT & NEST Full-Year Prep Book (Classes 11 & 12)', 
+          category: 'ug-pg-entrance', 
+          courseType: 'recorded', 
+          description: 'Complete full-year preparation book for IAT & NEST covering Classes 11 & 12 syllabus comprehensively.',
+          price: '₹8,999', 
+          discountedPrice: '₹9,999+', 
+          image: 'https://placehold.co/600x400/1e293b/ffffff?text=Full+Year+Book', 
+          featured: false, 
+          recent: false, 
+          tags: ['files'], 
+          link: '#',
+          startDate: 'Available from August 2025'
+        },
+        { 
+          id: 4, 
+          title: 'SciGeeks 2027 - Full-Year Commander', 
+          category: 'ug-pg-entrance', 
+          courseType: 'live', 
+          description: 'Complete full-year preparation for IAT, NEST, JEE, NEET and other competitive exams 2027. Expert Mentors from IISC, IISERs. Interactive App based learning with live & recorded classes. Comprehensive practice with PYQs & mock tests. 24x7 doubt support via Telegram. Scientist interactions, daily challenges & prizes.',
+          price: '₹39,999', 
+          discountedPrice: '₹49,999+', 
+          image: 'https://placehold.co/600x400/1e293b/ffffff?text=Full+Year+Commander', 
+          featured: true, 
+          recent: true, 
+          tags: ['live class', 'tests', 'videos', 'files'], 
+          link: '#',
+          startDate: 'Coming Soon 2027'
+        },
+        { 
+          id: 5, 
+          title: 'UDAAN 2027 - Online Course', 
+          category: 'ug-pg-entrance', 
+          courseType: 'recorded', 
+          description: 'Comprehensive online course for IAT, NEST, JEE, NEET and other competitive exams 2027. Self-paced learning with recorded sessions, study materials, and practice tests.',
+          price: '₹599', 
+          discountedPrice: '₹799', 
+          image: 'https://placehold.co/600x400/1e293b/ffffff?text=UDAAN+2027+Online', 
+          featured: false, 
+          recent: false, 
+          tags: ['videos', 'files'], 
+          link: '#',
+          startDate: 'Coming Soon 2027'
+        },
+        { 
+          id: 6, 
+          title: 'Research Methods', 
+          category: 'research-methods', 
+          courseType: 'recorded', 
+          description: 'Advanced course on scientific research methods, data analysis, and scientific writing. Learn how to conduct research, analyze data, and publish scientific papers.',
+          price: 'Free', 
+          discountedPrice: '', 
+          image: 'https://placehold.co/600x400/1e293b/ffffff?text=Research+Methods', 
+          featured: false, 
+          recent: true, 
+          tags: ['free content'], 
+          link: '#',
+          startDate: 'Available Now'
+        },
+        { 
+          id: 7, 
+          title: 'UDAAN 2027 - Half-Yearly Booster', 
+          category: 'ug-pg-entrance', 
+          courseType: 'live', 
+          description: 'Best IAT, NEST, JEE, NEET, and other competitive exams 2026 Course. Specializing for IAT & NEST. Expert Mentors from IISC, IISERs. Interactive App based learning with live & recorded classes. SciGeeks eBook: Crisp theory + question bank. Extensive Practice: Chapter-wise PYQs, mock tests. Doubt Support: Weekly sessions + 24x7 Telegram group. Engagement: Scientist interactions, daily challenges, prizes. Holistic Prep: Stress busters & strategy sessions.',
+          price: '₹22,999', 
+          discountedPrice: '₹24,999', 
+          discountPercent: 8,
+          image: 'https://placehold.co/600x400/1e293b/ffffff?text=Half-Yearly+Booster', 
+          featured: true, 
+          recent: true, 
+          tags: ['live class', 'tests', 'videos'], 
+          link: '#',
+          startDate: 'Started from June 2025'
+        }
       ],
       // Team
       founders: [
@@ -281,37 +458,21 @@
     // ============================== STATE ==============================
     const state = {
       currentPage: '/',
-      user: null, // { uid, email, displayName, emailVerified: true }
+      user: null,
       theme: 'light',
-      // Test state
-      currentTest: null, // { testId, questions, answers, timeLeft, timerInterval }
+      currentTest: null,
     };
 
     // ============================== UTILITY ==============================
     function getElement(id) { return document.getElementById(id); }
 
-    function showLoader() {
-      const loader = document.createElement('div');
-      loader.className = 'loader-overlay';
-      loader.id = 'loader';
-      loader.innerHTML = '<div class="loader"></div>';
-      document.body.appendChild(loader);
-    }
-    function hideLoader() {
-      const loader = document.getElementById('loader');
-      if (loader) loader.remove();
-    }
-
     function showToast(message, type = 'success') {
-      // Simple alert for demo
       alert(message);
     }
 
     // ============================== ROUTER ==============================
     function navigateTo(path) {
-      // Update URL hash
       window.location.hash = path;
-      // Render page
       renderPage(path);
     }
 
@@ -319,13 +480,16 @@
       return window.location.hash.slice(1) || '/';
     }
 
+    function getSlugFromPath() {
+      const parts = window.location.hash.split('/');
+      return parts[parts.length - 1];
+    }
+
     // ============================== PAGE RENDERERS ==============================
     function renderPage(path) {
       const main = getElement('mainContent');
       if (!main) return;
-      // Clear
       main.innerHTML = '';
-      // Page specific
       let content = '';
       switch (path) {
         case '/':
@@ -350,7 +514,6 @@
           content = renderBlogList();
           break;
         case '/blogs/:slug':
-          // Handle dynamic slug later
           content = renderBlogPost();
           break;
         case '/community':
@@ -378,20 +541,10 @@
           content = render404();
       }
       main.innerHTML = content;
-      // Apply page transition
       main.className = 'page-transition';
-      // Update active link styles
       updateActiveLinks(path);
-      // Attach event listeners for the rendered page
       attachPageEvents(path);
-      // Scroll to top
       window.scrollTo(0, 0);
-    }
-
-    // Helper to get slug from path (simplified)
-    function getSlugFromPath() {
-      const parts = window.location.hash.split('/');
-      return parts[parts.length - 1];
     }
 
     // ============================== PAGE COMPONENTS ==============================
@@ -432,8 +585,8 @@
           </video>
           <div class="absolute inset-0 bg-black/60 z-20"></div>
           <div class="relative z-30 text-center px-4">
-            <h1 class="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight">Join India’s #1 AI powered <strong class="text-green-400">Science</strong> Learning Platform</h1>
-            <p class="text-lg md:text-xl max-w-3xl mx-auto text-slate-200 mb-8">For the ones who live and breathe science this is your turf. <br /><span class="text-4xl font-bold bg-green-600 rounded-xl px-2">SciGeeks</span> is India’s research-first science learning platform built around one unified, concept-driven course that teaches science at its core for any and every exams. Designed for tomorrows scientists.</p>
+            <h1 class="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight">Join India's #1 AI powered <strong class="text-green-400">Science</strong> Learning Platform</h1>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto text-slate-200 mb-8">For the ones who live and breathe science this is your turf. <br /><span class="text-4xl font-bold bg-green-600 rounded-xl px-2">SciGeeks</span> is India's research-first science learning platform built around one unified, concept-driven course that teaches science at its core for any and every exams. Designed for tomorrows scientists.</p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
               <a href="#" data-link="/courses" class="inline-flex items-center justify-center gap-2 bg-white text-slate-800 font-semibold px-8 py-3 rounded-md hover:bg-slate-200 transition">Explore Courses →</a>
               <a href="#" data-link="/freetestpanel" class="inline-flex items-center justify-center gap-2 bg-white text-slate-800 font-semibold px-8 py-3 rounded-md hover:bg-slate-200 transition">Give a Free Test →</a>
@@ -525,8 +678,8 @@
                 <img src="aboutUs-img.png" alt="Community" class="w-full" />
               </div>
               <div>
-                <h2 class="text-3xl font-bold text-slate-800 dark:text-white">India’s First Research Community</h2>
-                <p class="text-lg mt-4">SciGeeks is more than a learning platform — it’s a growing community built around <strong>one unified, concept-first science system</strong> designed to support every scientific pathway.</p>
+                <h2 class="text-3xl font-bold text-slate-800 dark:text-white">India's First Research Community</h2>
+                <p class="text-lg mt-4">SciGeeks is more than a learning platform — it's a growing community built around <strong>one unified, concept-first science system</strong> designed to support every scientific pathway.</p>
                 <button class="mt-6 bg-slate-600 hover:bg-slate-700 text-white font-semibold px-8 py-3 rounded-md">Join Us</button>
               </div>
             </div>
@@ -555,32 +708,42 @@
 
     function renderCourses() {
       const courses = DATA.courses;
-      // Simplified category filter buttons (static)
-      const categories = ['all', 'ug-pg-entrance', 'college-entrance', 'research-methods'];
-      const categoryLabels = { all: 'All Courses', 'ug-pg-entrance': 'UG/PG Entrance', 'college-entrance': 'College Entrance', 'research-methods': 'Research Methods' };
-      // We'll just show all courses with a simple filter UI (client-side filter will be added via JS)
+      
       const courseCards = courses.map(c => {
-        const discount = c.originalPrice && c.discountedPrice ? Math.round((parseFloat(c.originalPrice.replace(/[₹,]/g,'')) - parseFloat(c.discountedPrice.replace(/[₹,]/g,''))) / parseFloat(c.originalPrice.replace(/[₹,]/g,'')) * 100) : 0;
-        const tags = c.tags ? c.tags.map(t => `<span class="text-xs font-medium px-2.5 py-0.5 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200">${t}</span>`).join(' ') : '';
+        const discount = c.discountPercent || 0;
+        const tags = c.tags ? c.tags.map(t => {
+          let tagClass = '';
+          if (t === 'live class') tagClass = 'tag-live';
+          else if (t === 'tests') tagClass = 'tag-tests';
+          else if (t === 'videos') tagClass = 'tag-videos';
+          else if (t === 'files') tagClass = 'tag-files';
+          else if (t === 'free content') tagClass = 'tag-free';
+          return `<span class="text-xs font-medium px-2.5 py-0.5 rounded-full ${tagClass}">${t}</span>`;
+        }).join(' ') : '';
+        
+        const isFree = c.price === 'Free';
+        
         return `
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 overflow-hidden h-full flex flex-col">
+          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 overflow-hidden h-full flex flex-col border border-slate-200 dark:border-gray-700">
             <div class="relative overflow-hidden">
               <img src="${c.image}" alt="${c.title}" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
               ${c.featured ? `<div class="absolute top-3 right-3 bg-yellow-400 text-gray-900 text-xs font-bold px-3 py-1 rounded-full">⭐ FEATURED</div>` : ''}
               ${c.recent ? `<div class="absolute top-3 left-3 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full">⚡ RECENT</div>` : ''}
+              ${discount > 0 ? `<div class="absolute bottom-3 right-3 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">${discount}% OFF</div>` : ''}
             </div>
             <div class="p-5 flex flex-col flex-grow">
               <h3 class="text-lg font-bold text-slate-800 dark:text-white mb-2">${c.title}</h3>
+              ${c.startDate ? `<p class="text-sm text-green-600 dark:text-green-400 font-semibold mb-2">${c.startDate}</p>` : ''}
+              <p class="text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-3">${c.description}</p>
               <div class="mb-4 flex flex-wrap gap-2">${tags}</div>
               <div class="mt-auto pt-4 border-t border-slate-200 dark:border-gray-700">
                 <div class="flex justify-between items-center mb-4">
                   <div class="flex items-baseline gap-2">
-                    <p class="text-2xl font-extrabold text-slate-800 dark:text-white">${c.discountedPrice || c.price}</p>
-                    ${c.originalPrice ? `<p class="text-sm text-slate-500 dark:text-slate-400 line-through">${c.originalPrice}</p>` : ''}
+                    <p class="text-2xl font-extrabold text-slate-800 dark:text-white">${c.price}</p>
+                    ${c.discountedPrice && !isFree ? `<p class="text-sm text-slate-500 dark:text-slate-400 line-through">${c.discountedPrice}</p>` : ''}
                   </div>
-                  ${discount > 0 ? `<div class="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">${discount}% OFF</div>` : ''}
                 </div>
-                <a href="${c.link || '#'}" class="block w-full bg-green-700 hover:bg-green-800 text-white font-semibold px-6 py-3 rounded-lg text-center transition">Get This Course</a>
+                <a href="${c.link || '#'}" class="block w-full bg-green-700 hover:bg-green-800 text-white font-semibold px-6 py-3 rounded-lg text-center transition">${isFree ? 'Enroll Now' : 'Get This Course'}</a>
               </div>
             </div>
           </div>
@@ -590,7 +753,7 @@
       return `
         <section class="relative bg-white dark:bg-gray-800 pt-24 pb-16">
           <div class="container mx-auto px-4 text-center">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 dark:text-white tracking-tight">Find Your Path to Scientific Excellence</h1>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 dark:text-white tracking-tight">All Courses</h1>
             <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-300">Explore our comprehensive programs designed for success in science and research.</p>
           </div>
         </section>
@@ -599,7 +762,6 @@
             <div class="flex justify-center flex-wrap gap-3 mb-5">
               <button class="category-filter px-4 py-2 text-sm font-semibold rounded-full bg-green-800 text-white shadow-lg" data-category="all">📚 All Courses</button>
               <button class="category-filter px-4 py-2 text-sm font-semibold rounded-full bg-white dark:bg-gray-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-gray-600" data-category="ug-pg-entrance">🎓 UG/PG Entrance</button>
-              <button class="category-filter px-4 py-2 text-sm font-semibold rounded-full bg-white dark:bg-gray-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-gray-600" data-category="college-entrance">🏫 College Entrance</button>
               <button class="category-filter px-4 py-2 text-sm font-semibold rounded-full bg-white dark:bg-gray-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-gray-600" data-category="research-methods">🔬 Research Methods</button>
             </div>
           </div>
@@ -853,11 +1015,9 @@
     }
 
     function renderFreeTestPanel() {
-      // Check if user is logged in
       const user = state.user;
       const tests = [{ id: 'test1', title: 'Science Sample Test', totalQuestions: 3, duration: 5 }];
-      // For demo, we assume not attempted
-      const attempted = new Set(); // no attempts
+      const attempted = new Set();
 
       const list = tests.map(test => `
         <div class="bg-slate-50 dark:bg-gray-800 p-6 rounded-lg shadow flex flex-col sm:flex-row justify-between items-center gap-6">
@@ -871,7 +1031,7 @@
               </div>
             </div>
           </div>
-          ${!user ? `<button class="bg-gray-600 text-white px-6 py-3 rounded-md flex items-center gap-2" data-testid="${test.id}" onclick="requireAuth()">🔒 Login to Attempt</button>` :
+          ${!user ? `<button class="bg-gray-600 text-white px-6 py-3 rounded-md flex items-center gap-2" onclick="requireAuth()">🔒 Login to Attempt</button>` :
           attempted.has(test.id) ? `<button disabled class="bg-gray-500 text-white px-6 py-3 rounded-md cursor-not-allowed">🔒 Attempted</button>` :
           `<a href="#" data-link="/test/instructions/${test.id}" class="bg-green-700 hover:bg-green-800 text-white px-6 py-3 rounded-md">▶ Attempt Test</a>`}
         </div>
@@ -886,8 +1046,6 @@
     }
 
     function renderTestInstructions() {
-      const testId = getSlugFromPath();
-      // For demo, we have only one test
       const test = DATA.testDetails;
       return `
         <div class="min-h-screen bg-gray-900 flex items-center justify-center p-6">
@@ -910,12 +1068,7 @@
     }
 
     function renderTestLive() {
-      // This will be a simplified test page
-      const testId = getSlugFromPath();
-      const questions = DATA.testQuestions;
       const duration = DATA.testDetails.duration;
-
-      // We'll build a simple timer and question display with JS
       return `
         <div class="min-h-screen bg-gray-900 text-white p-6" id="testContainer">
           <header class="flex justify-between items-center mb-6">
@@ -925,7 +1078,6 @@
             </div>
           </header>
           <div id="questionArea">
-            <!-- will be rendered by JS -->
           </div>
           <div class="mt-8 flex justify-between">
             <button id="prevBtn" class="bg-gray-600 px-6 py-3 rounded-lg disabled:opacity-50" disabled>Previous</button>
@@ -1048,7 +1200,6 @@
 
     // ============================== EVENT ATTACHMENTS ==============================
     function attachPageEvents(path) {
-      // Handle dynamic events based on page
       if (path === '/') {
         const newsletterForm = document.getElementById('newsletterForm');
         if (newsletterForm) {
@@ -1064,42 +1215,49 @@
       }
 
       if (path === '/courses') {
-        // Category filter
         const filters = document.querySelectorAll('.category-filter');
         const grid = document.getElementById('courseGrid');
         if (filters.length && grid) {
           filters.forEach(btn => {
             btn.addEventListener('click', function() {
               const cat = this.dataset.category;
-              // Update button styles
               filters.forEach(b => b.classList.remove('bg-green-800', 'text-white', 'shadow-lg'));
               this.classList.add('bg-green-800', 'text-white', 'shadow-lg');
-              // Filter courses
               const allCourses = DATA.courses;
               const filtered = cat === 'all' ? allCourses : allCourses.filter(c => c.category === cat);
-              // Re-render grid
               grid.innerHTML = filtered.map(c => {
-                const discount = c.originalPrice && c.discountedPrice ? Math.round((parseFloat(c.originalPrice.replace(/[₹,]/g,'')) - parseFloat(c.discountedPrice.replace(/[₹,]/g,''))) / parseFloat(c.originalPrice.replace(/[₹,]/g,'')) * 100) : 0;
-                const tags = c.tags ? c.tags.map(t => `<span class="text-xs font-medium px-2.5 py-0.5 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200">${t}</span>`).join(' ') : '';
+                const discount = c.discountPercent || 0;
+                const tags = c.tags ? c.tags.map(t => {
+                  let tagClass = '';
+                  if (t === 'live class') tagClass = 'tag-live';
+                  else if (t === 'tests') tagClass = 'tag-tests';
+                  else if (t === 'videos') tagClass = 'tag-videos';
+                  else if (t === 'files') tagClass = 'tag-files';
+                  else if (t === 'free content') tagClass = 'tag-free';
+                  return `<span class="text-xs font-medium px-2.5 py-0.5 rounded-full ${tagClass}">${t}</span>`;
+                }).join(' ') : '';
+                const isFree = c.price === 'Free';
                 return `
-                  <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 overflow-hidden h-full flex flex-col">
+                  <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 overflow-hidden h-full flex flex-col border border-slate-200 dark:border-gray-700">
                     <div class="relative overflow-hidden">
                       <img src="${c.image}" alt="${c.title}" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
                       ${c.featured ? `<div class="absolute top-3 right-3 bg-yellow-400 text-gray-900 text-xs font-bold px-3 py-1 rounded-full">⭐ FEATURED</div>` : ''}
                       ${c.recent ? `<div class="absolute top-3 left-3 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full">⚡ RECENT</div>` : ''}
+                      ${discount > 0 ? `<div class="absolute bottom-3 right-3 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">${discount}% OFF</div>` : ''}
                     </div>
                     <div class="p-5 flex flex-col flex-grow">
                       <h3 class="text-lg font-bold text-slate-800 dark:text-white mb-2">${c.title}</h3>
+                      ${c.startDate ? `<p class="text-sm text-green-600 dark:text-green-400 font-semibold mb-2">${c.startDate}</p>` : ''}
+                      <p class="text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-3">${c.description}</p>
                       <div class="mb-4 flex flex-wrap gap-2">${tags}</div>
                       <div class="mt-auto pt-4 border-t border-slate-200 dark:border-gray-700">
                         <div class="flex justify-between items-center mb-4">
                           <div class="flex items-baseline gap-2">
-                            <p class="text-2xl font-extrabold text-slate-800 dark:text-white">${c.discountedPrice || c.price}</p>
-                            ${c.originalPrice ? `<p class="text-sm text-slate-500 dark:text-slate-400 line-through">${c.originalPrice}</p>` : ''}
+                            <p class="text-2xl font-extrabold text-slate-800 dark:text-white">${c.price}</p>
+                            ${c.discountedPrice && !isFree ? `<p class="text-sm text-slate-500 dark:text-slate-400 line-through">${c.discountedPrice}</p>` : ''}
                           </div>
-                          ${discount > 0 ? `<div class="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">${discount}% OFF</div>` : ''}
                         </div>
-                        <a href="${c.link || '#'}" class="block w-full bg-green-700 hover:bg-green-800 text-white font-semibold px-6 py-3 rounded-lg text-center transition">Get This Course</a>
+                        <a href="${c.link || '#'}" class="block w-full bg-green-700 hover:bg-green-800 text-white font-semibold px-6 py-3 rounded-lg text-center transition">${isFree ? 'Enroll Now' : 'Get This Course'}</a>
                       </div>
                     </div>
                   </div>
@@ -1127,7 +1285,6 @@
       }
 
       if (path === '/test/live/:testId') {
-        // Initialize test
         initTest();
       }
 
@@ -1138,9 +1295,7 @@
             e.preventDefault();
             const email = document.getElementById('authEmail').value;
             const password = document.getElementById('authPassword').value;
-            // Simulate login
             if (email && password) {
-              // Store user in state and localStorage
               const user = { uid: 'user123', email, displayName: email.split('@')[0], emailVerified: true };
               state.user = user;
               localStorage.setItem('scigeeks_user', JSON.stringify(user));
@@ -1153,8 +1308,6 @@
         if (switchBtn) {
           switchBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            // Toggle form: we'll just change heading and button text
-            const form = document.getElementById('authForm');
             const heading = document.querySelector('.text-2xl.font-bold.text-white');
             const subtext = document.querySelector('.text-slate-400.mt-2');
             if (heading.innerText === 'Welcome Back') {
@@ -1184,7 +1337,6 @@
         }
       }
 
-      // Contact form
       if (path === '/contact') {
         const contactForm = document.getElementById('contactForm');
         if (contactForm) {
@@ -1204,7 +1356,7 @@
       const questions = DATA.testQuestions;
       let currentIndex = 0;
       let answers = {};
-      let timeLeft = DATA.testDetails.duration * 60; // seconds
+      let timeLeft = DATA.testDetails.duration * 60;
 
       const container = document.getElementById('testContainer');
       if (!container) return;
@@ -1227,13 +1379,11 @@
           <h2 class="text-2xl mb-4">${q.question}</h2>
           <div class="space-y-4">${optionsHTML}</div>
         `;
-        // Attach radio change events
         document.querySelectorAll('input[name="question"]').forEach(radio => {
           radio.addEventListener('change', function() {
             answers[q.id] = this.value;
           });
         });
-        // Update buttons
         prevBtn.disabled = currentIndex === 0;
         if (currentIndex === questions.length - 1) {
           nextBtn.innerHTML = '✅ Submit';
@@ -1245,7 +1395,6 @@
       }
 
       function submitTest() {
-        // Calculate score
         let score = 0;
         questions.forEach(q => {
           if (answers[q.id] === q.answer) score++;
@@ -1255,7 +1404,6 @@
         navigateTo('/freetestpanel');
       }
 
-      // Timer
       const timerInterval = setInterval(() => {
         timeLeft--;
         const mins = Math.floor(timeLeft / 60);
@@ -1269,7 +1417,6 @@
 
       testState = { timerInterval, questions, answers, currentIndex };
 
-      // Event listeners
       prevBtn.addEventListener('click', function() {
         if (currentIndex > 0) {
           currentIndex--;
@@ -1279,7 +1426,6 @@
 
       nextBtn.addEventListener('click', function() {
         if (currentIndex === questions.length - 1) {
-          // Submit
           submitTest();
         } else {
           currentIndex++;
@@ -1287,7 +1433,6 @@
         }
       });
 
-      // Initial render
       renderQuestion();
     }
 
@@ -1295,7 +1440,6 @@
     function updateActiveLinks(path) {
       document.querySelectorAll('[data-link]').forEach(link => {
         const href = link.getAttribute('data-link');
-        // For blog posts, we need to handle dynamic
         if (href === path) {
           link.classList.add('active');
         } else {
@@ -1372,7 +1516,6 @@
 
     // ============================== ROUTER INIT ==============================
     function initRouter() {
-      // Handle hash changes
       window.addEventListener('hashchange', function() {
         const path = getCurrentPath();
         renderPage(path);
@@ -1380,13 +1523,11 @@
         updateActiveLinks(path);
       });
 
-      // Handle link clicks
       document.addEventListener('click', function(e) {
         const link = e.target.closest('[data-link]');
         if (link) {
           e.preventDefault();
           const href = link.getAttribute('data-link');
-          // Check if it's a blog post link like /blogs/slug
           if (href.startsWith('/blogs/')) {
             navigateTo(href);
           } else {
@@ -1395,7 +1536,6 @@
         }
       });
 
-      // Initial load
       const initialPath = getCurrentPath();
       renderPage(initialPath);
       updateActiveLinks(initialPath);
@@ -1430,7 +1570,6 @@
           menu.classList.toggle('hidden');
           this.textContent = menu.classList.contains('hidden') ? '☰' : '✕';
         });
-        // Close on link click
         menu.querySelectorAll('a[data-link]').forEach(link => {
           link.addEventListener('click', function() {
             menu.classList.add('hidden');
