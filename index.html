@@ -1,1487 +1,547 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SciGeeks</title>
-  <!-- Favicon -->
-  <link rel="icon" href="Favicon.png" type="image/png" />
-  <!-- Tailwind CSS via CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    /* Global overrides and custom animations */
-    * { font-family: 'Montserrat', ui-sans-serif, system-ui, sans-serif; }
-    body { transition: background-color 0.3s, color 0.3s; }
-    .dark body { background-color: #111827; color: #d1d5db; }
-    .dark .bg-white { background-color: #1f2937; }
-    .dark .text-slate-800 { color: #f1f5f9; }
-    .dark .text-slate-600 { color: #cbd5e1; }
-    .dark .text-slate-700 { color: #e2e8f0; }
-    .dark .bg-slate-50 { background-color: #1e293b; }
-    .dark .bg-slate-100 { background-color: #2d3748; }
-    .dark .border-slate-200 { border-color: #374151; }
-    .dark .bg-gray-900 { background-color: #0f172a; }
-    .dark .bg-gray-800 { background-color: #1e293b; }
-    .dark .bg-gray-700 { background-color: #334155; }
-    .dark .text-slate-300 { color: #cbd5e1; }
-    .dark .text-slate-400 { color: #94a3b8; }
-    .dark .text-slate-500 { color: #64748b; }
-    .dark .bg-primary-100 { background-color: #1e3a2f; }
-    .dark .bg-primary-600 { background-color: #0b6e3b; }
-    .dark .bg-primary-700 { background-color: #0a5a31; }
-    .dark .bg-primary-800 { background-color: #084a27; }
-    .dark .text-primary-400 { color: #4ade80; }
-    .dark .bg-slate-600 { background-color: #475569; }
-    .dark .hover\:bg-slate-700:hover { background-color: #334155; }
-    .dark .border-gray-700 { border-color: #374151; }
-    .dark .bg-gray-950 { background-color: #020617; }
-    .dark .text-white { color: #f8fafc; }
-    .dark .text-gray-900 { color: #f1f5f9; }
-    /* Custom transitions */
-    .fade-enter { opacity: 0; transform: translateY(20px); }
-    .fade-enter-active { opacity: 1; transform: translateY(0); transition: all 0.3s ease-out; }
-    /* Timeline styles (from About.module.css) */
-    .timeline { position: relative; display: flex; flex-direction: column; gap: 3rem; }
-    .timeline::before { content: ""; position: absolute; top: 0; left: 28px; width: 2px; height: 100%; background-color: #cbd5e1; z-index: 0; }
-    .dark .timeline::before { background-color: #475569; }
-    .timeline-item { position: relative; padding-left: 80px; }
-    .timeline-icon { position: absolute; left: 0; top: 0; z-index: 10; width: 56px; height: 56px; background-color: white; border-radius: 9999px; display: flex; align-items: center; justify-content: center; border: 2px solid #cbd5e1; }
-    .dark .timeline-icon { background-color: #1e293b; border-color: #475569; }
-    .timeline-content { padding-top: 0.25rem; }
-    @media (max-width: 768px) {
-      .timeline-item { padding-left: 80px; padding-right: 15px; }
-    }
-    /* Home carousel */
-    .carousel-container { mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
-    .carousel-track { display: flex; width: max-content; animation: scroll 25s linear infinite; }
-    .carousel-slide { flex: 0 0 160px; margin-right: 3rem; }
-    @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-12.5%); } }
-    /* Loader */
-    .loader-overlay { position: fixed; inset: 0; background: rgba(17,24,39,0.8); display: flex; justify-content: center; align-items: center; z-index: 9999; backdrop-filter: blur(4px); }
-    .loader { width: 80px; aspect-ratio: 1; display: grid; border: 4px solid #0000; border-radius: 50%; border-color: #6b7280 #0000; animation: l16 1s infinite linear; }
-    .loader::before, .loader::after { content: ""; grid-area: 1/1; margin: 2px; border: inherit; border-radius: 50%; }
-    .loader::before { border-color: #34d399 #0000; animation: inherit; animation-duration: .5s; animation-direction: reverse; }
-    .loader::after { margin: 8px; }
-    @keyframes l16 { 100% { transform: rotate(1turn); } }
-    /* Utility */
-    .hidden-page { display: none; }
-    .active-page { display: block; }
-    /* Transitions for pages */
-    .page-transition { animation: fadeIn 0.3s ease-out; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SciGeeks | Premier Coaching for Science Entrance Exams</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom Styles -->
+    <style>
+        /* Custom styles to match the original design */
+        body {
+            font-family: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+        }
+        .bg-primary {
+            background-color: #0f3b2c;
+        }
+        .bg-primary-light {
+            background-color: #e6f0ec;
+        }
+        .text-primary {
+            color: #0f3b2c;
+        }
+        .text-primary-light {
+            color: #4a8c74;
+        }
+        .border-primary {
+            border-color: #0f3b2c;
+        }
+        .hover\:bg-primary-dark:hover {
+            background-color: #0a2a1f;
+        }
+        .hover\:text-primary-dark:hover {
+            color: #0a2a1f;
+        }
+        /* Custom carousel animation */
+        .carousel-track {
+            display: flex;
+            width: max-content;
+            animation: scroll 25s linear infinite;
+        }
+        .carousel-slide {
+            flex: 0 0 160px;
+            margin-right: 3rem;
+        }
+        @keyframes scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-12.5%); }
+        }
+        /* Smooth transition for theme toggle */
+        .theme-transition {
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+    </style>
 </head>
 <body>
-  <!-- App container -->
-  <div id="app" class="bg-white dark:bg-gray-900 text-slate-700 dark:text-slate-300 min-h-screen flex flex-col transition-colors duration-300">
-    <!-- Navbar -->
-    <nav id="navbar" class="sticky top-0 z-50 bg-gray-950 border-b border-gray-700">
-      <div class="container mx-auto px-4 lg:px-8">
-        <div class="flex items-center justify-between h-20">
-          <a href="#" data-link="/" class="flex items-center gap-3 text-white">
-            <img src="Logo.png" alt="SciGeeks Logo" class="h-12 w-auto" />
-            <span class="text-3xl font-bold">SciGeeks</span>
-          </a>
-          <div class="hidden md:flex items-center gap-2">
-            <a href="#" data-link="/" class="text-slate-300 hover:text-white px-3 py-1.5 rounded font-medium">Home</a>
-            <a href="#" data-link="/courses" class="text-slate-300 hover:text-white px-3 py-1.5 rounded font-medium">Courses</a>
-            <a href="#" data-link="/about" class="text-slate-300 hover:text-white px-3 py-1.5 rounded font-medium">About</a>
-            <a href="#" data-link="/contact" class="text-slate-300 hover:text-white px-3 py-1.5 rounded font-medium">Contact</a>
-            <div class="relative" id="moreDropdown">
-              <button id="moreToggle" class="flex items-center gap-1 text-slate-300 hover:text-white px-3 py-1.5 font-medium">
-                More <span id="moreChevron" class="transition-transform">▼</span>
-              </button>
-              <div id="moreMenu" class="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-48 bg-gray-700 rounded-md shadow-lg hidden">
-                <a href="#" data-link="/team" class="block px-4 py-2 text-white hover:bg-gray-600 rounded-md">Our Team</a>
-                <a href="#" data-link="/research-institutes" class="block px-4 py-2 text-white hover:bg-gray-600 rounded-md">Research Institutes</a>
-                <a href="#" data-link="/blog-posts" class="block px-4 py-2 text-white hover:bg-gray-600 rounded-md">Blogs</a>
-                <a href="#" data-link="/community" class="block px-4 py-2 text-white hover:bg-gray-600 rounded-md">Community</a>
-                <a href="#" data-link="/scigeeksapp" class="block px-4 py-2 text-white hover:bg-gray-600 rounded-md">The SciGeeks App</a>
-              </div>
-            </div>
-          </div>
-          <div class="flex items-center gap-3">
-            <button id="themeToggle" class="p-2 rounded-full hover:bg-gray-700 text-slate-300">🌙</button>
-            <div id="authSection" class="flex items-center">
-              <a href="#" data-link="/auth" id="authLink" class="hidden md:flex bg-slate-600 px-5 py-2 rounded-xl text-white font-semibold hover:bg-slate-700 text-sm">Sign In</a>
-              <div id="userMenu" class="hidden items-center gap-2">
-                <button id="userAvatar" class="flex items-center justify-center w-8 h-8 rounded-full bg-green-700 text-white font-bold cursor-pointer">U</button>
-                <button id="logoutBtn" class="p-2 rounded-full hover:bg-gray-700 text-slate-300 cursor-pointer">🚪</button>
-              </div>
-            </div>
-            <button id="mobileMenuToggle" class="md:hidden p-2 text-white">☰</button>
-          </div>
-        </div>
-      </div>
-      <!-- Mobile menu -->
-      <div id="mobileMenu" class="md:hidden bg-gray-900 border-t border-gray-700 hidden">
-        <nav class="flex flex-col p-4 space-y-2">
-          <a href="#" data-link="/" class="block px-4 py-2 rounded-md text-lg text-slate-300 hover:bg-gray-800">Home</a>
-          <a href="#" data-link="/courses" class="block px-4 py-2 rounded-md text-lg text-slate-300 hover:bg-gray-800">Courses</a>
-          <a href="#" data-link="/about" class="block px-4 py-2 rounded-md text-lg text-slate-300 hover:bg-gray-800">About</a>
-          <a href="#" data-link="/contact" class="block px-4 py-2 rounded-md text-lg text-slate-300 hover:bg-gray-800">Contact</a>
-          <div class="border-t border-gray-700 my-2"></div>
-          <a href="#" data-link="/team" class="block px-4 py-2 rounded-md text-lg text-slate-300 hover:bg-gray-800">Our Team</a>
-          <a href="#" data-link="/research-institutes" class="block px-4 py-2 rounded-md text-lg text-slate-300 hover:bg-gray-800">Research Institutes</a>
-          <a href="#" data-link="/blog-posts" class="block px-4 py-2 rounded-md text-lg text-slate-300 hover:bg-gray-800">Blogs</a>
-          <a href="#" data-link="/community" class="block px-4 py-2 rounded-md text-lg text-slate-300 hover:bg-gray-800">Community</a>
-          <a href="#" data-link="/scigeeksapp" class="block px-4 py-2 rounded-md text-lg text-slate-300 hover:bg-gray-800">The SciGeeks App</a>
-          <div class="border-t border-gray-700 my-2"></div>
-          <a href="#" data-link="/auth" class="block px-4 py-2 rounded-md text-lg text-slate-300 hover:bg-gray-800">Register / Login</a>
-        </nav>
-      </div>
-    </nav>
+    <!-- App Container -->
+    <div id="app" class="min-h-screen flex flex-col bg-white text-gray-800 theme-transition">
 
-    <!-- Main content -->
-    <main id="mainContent" class="flex-grow">
-      <!-- Pages will be injected here -->
-    </main>
+        <!-- ==================== NAVBAR ==================== -->
+        <nav class="sticky top-0 z-50 bg-primary text-white shadow-md">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-20">
+                    <!-- Logo -->
+                    <a href="#" data-link="/" class="flex items-center gap-3 text-2xl font-bold">
+                        <span>SciGeeks</span>
+                    </a>
 
-    <!-- Footer -->
-    <footer class="bg-gray-950 border-t border-gray-700">
-      <div class="container mx-auto px-4 py-16">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-          <div class="col-span-1 md:col-span-2 lg:col-span-1">
-            <div class="flex mb-4">
-              <img src="Logo-Full-White.png" alt="SciGeeks Logo" class="h-16 w-auto" />
-            </div>
-            <p class="text-slate-300 text-sm">Unraveling the Universe of Knowledge through innovative education and cutting-edge research.</p>
-          </div>
-          <div><h4 class="font-semibold text-white mb-4">Quick Links</h4>
-            <ul class="space-y-3">
-              <li><a href="#" data-link="/" class="text-sm text-slate-400 hover:text-white">Home</a></li>
-              <li><a href="#" data-link="/about" class="text-sm text-slate-400 hover:text-white">About Us</a></li>
-              <li><a href="#" data-link="/courses" class="text-sm text-slate-400 hover:text-white">Courses</a></li>
-              <li><a href="#" data-link="/contact" class="text-sm text-slate-400 hover:text-white">Contact Us</a></li>
-            </ul>
-          </div>
-          <div><h4 class="font-semibold text-white mb-4">Other Links</h4>
-            <ul class="space-y-3">
-              <li><a href="#" data-link="/research-institutes" class="text-sm text-slate-400 hover:text-white">Research Institutes</a></li>
-              <li><a href="#" data-link="/team" class="text-sm text-slate-400 hover:text-white">Our Team</a></li>
-              <li><a href="#" data-link="/blog-posts" class="text-sm text-slate-400 hover:text-white">Blogs</a></li>
-              <li><a href="#" data-link="/community" class="text-sm text-slate-400 hover:text-white">Community</a></li>
-              <li><a href="#" data-link="/scigeeksapp" class="text-sm text-slate-400 hover:text-white">The SciGeeks App</a></li>
-            </ul>
-          </div>
-          <div><h4 class="font-semibold text-white mb-4">Contact Us</h4>
-            <ul class="space-y-3 text-sm">
-              <li class="flex items-start"><span class="text-slate-400">📍 Flat-402, 3rd Floor, Anandamela Apartmrnt Bhatenda (West), Rajarhat Deara District, North 24 Parganas - 700135</span></li>
-              <li class="flex items-center"><span class="text-slate-400">📞 +91 74394 30174</span></li>
-              <li class="flex items-center"><span class="text-slate-400">✉️ hello@scigeeks.in</span></li>
-            </ul>
-          </div>
-          <div><h4 class="font-semibold text-white mb-4">Find Us on Map</h4>
-            <div class="rounded-lg overflow-hidden h-40 bg-gray-700 flex items-center justify-center text-slate-400 text-sm">Map placeholder</div>
-          </div>
-        </div>
-        <div class="mt-12 pt-8 border-t border-gray-700 flex flex-col sm:flex-row justify-between items-center">
-          <p class="text-sm text-slate-300">&copy; 2025 SciGeeks. All Rights Reserved. <button id="legalPolicyBtn" class="underline hover:text-white text-sm">Privacy Policy & Terms</button></p>
-          <div class="flex space-x-4 mt-4 sm:mt-0">
-            <a href="#" class="text-slate-500 hover:text-white">📘</a>
-            <a href="#" class="text-slate-500 hover:text-white">📷</a>
-            <a href="#" class="text-slate-500 hover:text-white">🔗</a>
-          </div>
-        </div>
-      </div>
-    </footer>
-
-    <!-- Legal Policy Modal -->
-    <div id="legalModal" class="fixed inset-0 z-50 bg-black/60 flex items-center justify-center px-4 hidden">
-      <div class="w-full max-w-4xl max-h-[80vh] bg-white dark:bg-slate-900 rounded-lg shadow-xl flex flex-col">
-        <div class="flex items-center justify-between px-6 py-4 border-b dark:border-slate-700">
-          <h2 class="text-lg font-semibold text-slate-800 dark:text-slate-100">Privacy Policy & Terms of Use</h2>
-          <button id="closeLegalModal" class="text-slate-500 hover:text-slate-800 dark:hover:text-white text-2xl">&times;</button>
-        </div>
-        <div class="px-6 py-5 overflow-y-auto text-sm text-slate-600 dark:text-slate-300 space-y-6 leading-relaxed">
-          <section><h3 class="text-base font-semibold text-slate-800 dark:text-slate-100">Privacy Policy</h3><p>SciGeeks respects your privacy...</p></section>
-          <section><h4 class="font-semibold">Information We Collect</h4><p>We may collect personal information...</p></section>
-          <section><h4 class="font-semibold">Use of Information</h4><p>Collected data is used to provide educational services...</p></section>
-          <section><h4 class="font-semibold">Analytics & Cookies</h4><p>We use analytics tools...</p></section>
-          <section><h4 class="font-semibold">Data Security</h4><p>Reasonable safeguards are applied...</p></section>
-          <section class="pt-4 border-t dark:border-slate-700"><h3 class="text-base font-semibold text-slate-800 dark:text-slate-100">Terms & Conditions</h3><p>By using SciGeeks, you agree...</p></section>
-          <section><h4 class="font-semibold">Platform Purpose</h4><p>SciGeeks is an educational platform...</p></section>
-          <section><h4 class="font-semibold">User Responsibilities</h4><p>Users must not misuse...</p></section>
-          <section><h4 class="font-semibold">Intellectual Property</h4><p>All content is the property...</p></section>
-          <section><h4 class="font-semibold">Limitation of Liability</h4><p>SciGeeks shall not be liable...</p></section>
-          <section><h4 class="font-semibold">Governing Law</h4><p>These terms are governed by the laws of India...</p></section>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // ============================== DATA ==============================
-    const DATA = {
-      // Home stats
-      stats: [
-        { icon: '👥', value: '50+', label: 'Students Trained' },
-        { icon: '📚', value: '20+', label: 'Courses Offered' },
-        { icon: '🏆', value: '94.85%', label: 'Success Rate' },
-        { icon: '📈', value: '2+', label: 'Years of Experience' }
-      ],
-      featuredCourses: [
-        { title: "24*7 Hint First AI Mentoring & Adaptive Learning", description: "Get personalized AI-powered mentoring available round the clock with adaptive learning paths tailored to your pace.", image: "main page main courses 1.png" },
-        { title: "Flagship All in One Course", description: "One Science for all Needs. Learn science like never before. Understand the core concepts from atoms to cells.", image: "main page main courses 2.png" },
-        { title: "Research Methods", description: "Advanced course on scientific research methods.", image: "main page main courses 3.png" }
-      ],
-      institutes: [
-        { name: "ISI", logo: "ISI Kolkata.jpg" },
-        { name: "CEBS", logo: "cebs.jpeg" },
-        { name: "IISER", logo: "iiser.jpg" },
-        { name: "IISc", logo: "IISC-Bangalore-scaled.jpg" }
-      ],
-      // Courses
-      courses: [
-        { id: 1, title: 'ISI B.Stat/B.Math Preparation', category: 'ug-pg-entrance', courseType: 'live', duration: '6 months', students: '150+', modules: 4, description: 'Comprehensive preparation for ISI entrance exams.', price: '₹25,000', discountedPrice: '₹22,500', image: 'https://placehold.co/600x400/e2e8f0/475569?text=ISI+Prep', featured: true, recent: false, tags: ['live class', 'tests'], link: '#' },
-        { id: 2, title: 'NEST & IAT Commander', category: 'ug-pg-entrance', courseType: 'recorded', duration: '4 months', students: '200+', modules: 5, description: 'Complete course for NEST and IAT.', price: '₹20,000', discountedPrice: '₹18,000', image: 'https://placehold.co/600x400/e2e8f0/475569?text=NEST/IAT', featured: false, recent: true, tags: ['videos', 'files'], link: '#' },
-        { id: 3, title: 'IIT JAM Physics', category: 'ug-pg-entrance', courseType: 'live', duration: '8 months', students: '100+', modules: 6, description: 'Intensive preparation for IIT JAM Physics.', price: '₹30,000', discountedPrice: '₹27,000', image: 'https://placehold.co/600x400/e2e8f0/475569?text=IIT+JAM', featured: true, recent: false, tags: ['live class', 'tests', 'videos'], link: '#' },
-        { id: 4, title: 'Advanced Research Methodology', category: 'research-methods', courseType: 'recorded', duration: '3 months', students: '50+', modules: 4, description: 'Advanced course on scientific research methods.', price: '₹15,000', discountedPrice: '₹13,500', image: 'https://placehold.co/600x400/e2e8f0/475569?text=Research', featured: false, recent: false, tags: ['free content'], link: '#' }
-      ],
-      // Team
-      founders: [
-        { name: "Dr. Atasi Sarkar", designation: "Founder & Director", image: "https://placehold.co/400x400/e2e8f0/475569?text=A.S.", education: "M.Tech-Ph.D. Biological Science, IIT KGP", experience: "10+ Years", linkedin: "#" },
-        { name: "Dr. Soumya Sarkar", designation: "Co-Founder & Academic Head", image: "https://placehold.co/400x400/e2e8f0/475569?text=S.S.", education: "Ph.D. Biological Science, ISI Kolkata", experience: "15+ Years", linkedin: "#" },
-        { name: "Soubantik Sengupta", designation: "Chief Operating Officer and Co-founder", image: "https://placehold.co/400x400/e2e8f0/475569?text=S.S.", education: "M.Sc. Cognitive Science, IIT Delhi", experience: "5+ Years", linkedin: "#" },
-        { name: "Rajritwik Tarafdar", designation: "Chief Marketing Officer", image: "https://placehold.co/400x400/e2e8f0/475569?text=R.T.", education: "B.Tech Electrical Engineering", experience: "12+ Years", linkedin: "#" }
-      ],
-      mentors: [
-        { name: "Avik Ghosh", image: "https://placehold.co/400x400/e2e8f0/475569?text=A.G.", education: "M.Sc. Mathematics, Jadavpur University", experience: "5+ Years", specialization: "Mathematics", linkedin: "#" },
-        { name: "Debarghya De", image: "https://placehold.co/400x400/e2e8f0/475569?text=D.D.", education: "i-Ph.D. Biological Science, IISER Pune", experience: "3+ Years", specialization: "Biology", linkedin: "#" },
-        { name: "Shubhradip Adhikary", image: "https://placehold.co/400x400/e2e8f0/475569?text=S.A.", education: "M.Sc. Biological Science, IISc Bangalore", experience: "3+ Years", specialization: "Biology", linkedin: "#" },
-        { name: "Ahamadullah Khan", image: "https://placehold.co/400x400/e2e8f0/475569?text=A.K.", education: "Ph.D. Physics, IISER Kolkata", experience: "5+ Years", specialization: "Physics", linkedin: "#" },
-        { name: "Soumyadeep Dey", image: "https://placehold.co/400x400/e2e8f0/475569?text=S.D.", education: "Ph.D. Chemistry, IISER Mohali", experience: "5+ Years", specialization: "Chemistry", linkedin: "#" }
-      ],
-      // Blog
-      blogPosts: [
-        { id: 1, slug: "cracking-the-iat", title: "Cracking the IAT: A Strategic Guide", author: "Dr. Priya Sharma", date: "August 5, 2025", image: "https://placehold.co/1200x600/e2e8f0/475569?text=IAT+Strategy", excerpt: "The IISER Aptitude Test (IAT) is your gateway...", content: "<p>Full content here...</p>" },
-        { id: 2, slug: "future-of-ai", title: "The Future of AI in Scientific Research", author: "Dr. Rajesh Kumar", date: "August 1, 2025", image: "https://placehold.co/1200x600/e2e8f0/475569?text=AI+in+Science", excerpt: "Artificial Intelligence is no longer a futuristic concept...", content: "<p>Full content here...</p>" }
-      ],
-      // FAQ
-      faqs: [
-        { category: "General", question: "What is SciGeeks?", answer: "SciGeeks is a science learning platform..." },
-        { category: "General", question: "How do I enroll?", answer: "You can enroll by signing up and selecting a course." },
-        { category: "Courses & Workshops", question: "Are the courses live or recorded?", answer: "We offer both live and recorded courses." },
-        { category: "Admissions & Enrollment", question: "What is the admission process?", answer: "You can apply online through our website." }
-      ],
-      // Research Institutes
-      researchInstitutes: [
-        { name: "IISc Bangalore", location: "Bangalore", description: "Premier research institute.", courses: ["B.Sc", "M.Sc", "Ph.D"], examInfo: "Admission through JEE/NEET/GATE", established: "1909", website: "#", logo: "https://placehold.co/100x100/e2e8f0/475569?text=IISc" },
-        { name: "IISER Pune", location: "Pune", description: "Leading institute for science education.", courses: ["BS-MS", "Ph.D"], examInfo: "Admission through IAT", established: "2006", website: "#", logo: "https://placehold.co/100x100/e2e8f0/475569?text=IISER" }
-      ],
-      // Test questions (sample)
-      testQuestions: [
-        { id: 1, question: "What is the SI unit of force?", options: ["Watt", "Joule", "Newton", "Pascal"], answer: "Newton" },
-        { id: 2, question: "Which law is also known as law of inertia?", options: ["Newton's First Law", "Newton's Second Law", "Newton's Third Law", "Law of Gravitation"], answer: "Newton's First Law" },
-        { id: 3, question: "What is the chemical formula for water?", options: ["H2O2", "CO2", "O2", "H2O"], answer: "H2O" }
-      ],
-      testDetails: { title: "Science Sample Test", duration: 5, totalQuestions: 3 }
-    };
-
-    // ============================== STATE ==============================
-    const state = {
-      currentPage: '/',
-      user: null, // { uid, email, displayName, emailVerified: true }
-      theme: 'light',
-      // Test state
-      currentTest: null, // { testId, questions, answers, timeLeft, timerInterval }
-    };
-
-    // ============================== UTILITY ==============================
-    function getElement(id) { return document.getElementById(id); }
-
-    function showLoader() {
-      const loader = document.createElement('div');
-      loader.className = 'loader-overlay';
-      loader.id = 'loader';
-      loader.innerHTML = '<div class="loader"></div>';
-      document.body.appendChild(loader);
-    }
-    function hideLoader() {
-      const loader = document.getElementById('loader');
-      if (loader) loader.remove();
-    }
-
-    function showToast(message, type = 'success') {
-      // Simple alert for demo
-      alert(message);
-    }
-
-    // ============================== ROUTER ==============================
-    function navigateTo(path) {
-      // Update URL hash
-      window.location.hash = path;
-      // Render page
-      renderPage(path);
-    }
-
-    function getCurrentPath() {
-      return window.location.hash.slice(1) || '/';
-    }
-
-    // ============================== PAGE RENDERERS ==============================
-    function renderPage(path) {
-      const main = getElement('mainContent');
-      if (!main) return;
-      // Clear
-      main.innerHTML = '';
-      // Page specific
-      let content = '';
-      switch (path) {
-        case '/':
-          content = renderHome();
-          break;
-        case '/about':
-          content = renderAbout();
-          break;
-        case '/courses':
-          content = renderCourses();
-          break;
-        case '/contact':
-          content = renderContact();
-          break;
-        case '/team':
-          content = renderTeam();
-          break;
-        case '/research-institutes':
-          content = renderResearchInstitutes();
-          break;
-        case '/blog-posts':
-          content = renderBlogList();
-          break;
-        case '/blogs/:slug':
-          // Handle dynamic slug later
-          content = renderBlogPost();
-          break;
-        case '/community':
-          content = renderCommunity();
-          break;
-        case '/scigeeksapp':
-          content = renderAppDev();
-          break;
-        case '/freetestpanel':
-          content = renderFreeTestPanel();
-          break;
-        case '/test/instructions/:testId':
-          content = renderTestInstructions();
-          break;
-        case '/test/live/:testId':
-          content = renderTestLive();
-          break;
-        case '/auth':
-          content = renderAuth();
-          break;
-        case '/dashboard/user/:userId':
-          content = renderDashboard();
-          break;
-        default:
-          content = render404();
-      }
-      main.innerHTML = content;
-      // Apply page transition
-      main.className = 'page-transition';
-      // Update active link styles
-      updateActiveLinks(path);
-      // Attach event listeners for the rendered page
-      attachPageEvents(path);
-      // Scroll to top
-      window.scrollTo(0, 0);
-    }
-
-    // Helper to get slug from path (simplified)
-    function getSlugFromPath() {
-      const parts = window.location.hash.split('/');
-      return parts[parts.length - 1];
-    }
-
-    // ============================== PAGE COMPONENTS ==============================
-    function renderHome() {
-      const stats = DATA.stats.map(s => `
-        <div class="text-center">
-          <div class="text-3xl md:text-4xl font-bold text-slate-800 dark:text-white">${s.value}</div>
-          <p class="text-sm text-slate-600 dark:text-slate-300">${s.label}</p>
-        </div>
-      `).join('');
-
-      const featured = DATA.featuredCourses.map(c => `
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden group">
-          <div class="overflow-hidden h-56">
-            <img src="${c.image}" alt="${c.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-semibold text-slate-800 dark:text-white mb-2">${c.title}</h3>
-            <p class="text-slate-600 dark:text-slate-400 mb-4">${c.description}</p>
-            <a href="#" data-link="/courses" class="font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white">Learn More &rarr;</a>
-          </div>
-        </div>
-      `).join('');
-
-      const institutes = DATA.institutes;
-      const repeated = Array(8).fill(institutes).flat();
-      const carouselSlides = repeated.map((inst, i) => `
-        <div class="carousel-slide flex items-center justify-center p-2">
-          <img src="${inst.logo}" alt="${inst.name}" class="max-h-full max-w-full object-contain" />
-        </div>
-      `).join('');
-
-      return `
-        <section class="relative min-h-screen pt-16 flex items-center justify-center text-white overflow-hidden pb-8">
-          <video autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover z-10">
-            <source src="main page placeholder video.MP4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-          <div class="absolute inset-0 bg-black/60 z-20"></div>
-          <div class="relative z-30 text-center px-4">
-            <h1 class="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight">Join India’s #1 AI powered <strong class="text-green-400">Science</strong> Learning Platform</h1>
-            <p class="text-lg md:text-xl max-w-3xl mx-auto text-slate-200 mb-8">For the ones who live and breathe science this is your turf. <br /><span class="text-4xl font-bold bg-green-600 rounded-xl px-2">SciGeeks</span> is India’s research-first science learning platform built around one unified, concept-driven course that teaches science at its core for any and every exams. Designed for tomorrows scientists.</p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-              <a href="#" data-link="/courses" class="inline-flex items-center justify-center gap-2 bg-white text-slate-800 font-semibold px-8 py-3 rounded-md hover:bg-slate-200 transition">Explore Courses →</a>
-              <a href="#" data-link="/freetestpanel" class="inline-flex items-center justify-center gap-2 bg-white text-slate-800 font-semibold px-8 py-3 rounded-md hover:bg-slate-200 transition">Give a Free Test →</a>
-            </div>
-          </div>
-        </section>
-        <section class="py-12 bg-slate-50 dark:bg-gray-800">
-          <div class="container mx-auto px-4">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">${stats}</div>
-          </div>
-        </section>
-        <section class="py-16 bg-green-50 dark:bg-gray-800">
-          <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-              <h2 class="text-3xl md:text-4xl font-bold text-slate-800 dark:text-white">Explore Our Premier Courses</h2>
-              <p class="mt-4 text-lg text-slate-600 font-semibold max-w-2xl mx-auto">Kickstart your scientific journey with our most popular programs.</p>
-            </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">${featured}</div>
-          </div>
-        </section>
-        <section class="py-16 bg-slate-50 dark:bg-gray-800">
-          <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-slate-800 dark:text-white mb-4">Top Research Institutes We Can AIM for</h2>
-            <p class="text-lg text-slate-600 dark:text-slate-300 mb-12">From geek mode to peak mode – your journey starts here</p>
-          </div>
-          <div class="carousel-container relative w-full overflow-hidden">
-            <div class="carousel-track flex">${carouselSlides}</div>
-          </div>
-        </section>
-        <section class="py-16 bg-green-50 dark:bg-gray-800">
-          <div class="container mx-auto px-4">
-            <div class="bg-gray-800 rounded-lg p-8 md:p-12 text-center">
-              <h2 class="text-3xl font-bold text-white mb-4">Stay Ahead of the Curve</h2>
-              <p class="text-slate-200 mb-8 max-w-2xl mx-auto">Subscribe to our newsletter for the latest courses, research updates, and educational insights.</p>
-              <form id="newsletterForm" class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
-                <input type="email" id="newsletterEmail" placeholder="Enter your email address" class="w-full px-4 py-3 rounded-md text-white bg-gray-700 border border-gray-600 focus:ring-2 focus:ring-green-500" required />
-                <button type="submit" class="bg-white text-slate-800 font-semibold px-6 py-3 rounded-md hover:bg-slate-200 transition">Subscribe</button>
-              </form>
-            </div>
-          </div>
-        </section>
-      `;
-    }
-
-    function renderAbout() {
-      const philosophy = [
-        { icon: '🎯', title: 'Mission-Driven', description: 'We exist to make top-tier science education accessible for every curious mind.' },
-        { icon: '📖', title: 'Comprehensive Resources', description: 'From brain-boosting study materials to tailored guidance.' },
-        { icon: '👥', title: 'Supportive Community', description: 'Join a crew of like-minded geeks and mentors.' }
-      ];
-      const timeline = [
-        { year: '2024', title: 'The Beginning', description: 'SciGeeks was launched with a clear mission.' },
-        { year: '2024', title: 'Building the Foundation', description: 'We brought together passionate educators.' },
-        { year: '2025', title: 'First Milestones', description: 'With our very first batch in full swing.' },
-        { year: '2026', title: 'SciGeeks AI and Community', description: 'Dropping soon...' },
-        { year: 'The Road Ahead', title: 'Inspiring the Future', description: 'As our students gear up for their upcoming exams.' }
-      ];
-
-      const philHTML = philosophy.map(p => `
-        <div class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-lg text-center">
-          <div class="text-4xl mb-6">${p.icon}</div>
-          <h3 class="text-xl font-semibold text-slate-800 dark:text-white mb-2">${p.title}</h3>
-          <p class="text-slate-600 dark:text-slate-400">${p.description}</p>
-        </div>
-      `).join('');
-
-      const timelineHTML = timeline.map(item => `
-        <div class="timeline-item">
-          <div class="timeline-icon">🧪</div>
-          <div class="timeline-content">
-            <span class="text-sm font-semibold text-slate-500 dark:text-slate-400">${item.year}</span>
-            <h3 class="text-xl font-semibold text-slate-800 dark:text-white mt-1">${item.title}</h3>
-            <p class="mt-2">${item.description}</p>
-          </div>
-        </div>
-      `).join('');
-
-      return `
-        <section class="relative pt-24 pb-16 text-white" style="background-image: url('scigeeks aboutus header.jpg'); background-size: cover; background-position: center;">
-          <div class="absolute inset-0 bg-black/60"></div>
-          <div class="relative container mx-auto px-4 text-center">
-            <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">Empowering the Next Generation of <span class="text-green-400">Geeky Scientists.</span></h1>
-          </div>
-        </section>
-        <section class="py-16 sm:py-24">
-          <div class="container mx-auto px-4">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-              <div class="rounded-lg overflow-hidden shadow-2xl">
-                <img src="aboutUs-img.png" alt="Community" class="w-full" />
-              </div>
-              <div>
-                <h2 class="text-3xl font-bold text-slate-800 dark:text-white">India’s First Research Community</h2>
-                <p class="text-lg mt-4">SciGeeks is more than a learning platform — it’s a growing community built around <strong>one unified, concept-first science system</strong> designed to support every scientific pathway.</p>
-                <button class="mt-6 bg-slate-600 hover:bg-slate-700 text-white font-semibold px-8 py-3 rounded-md">Join Us</button>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section class="py-16 bg-slate-50 dark:bg-gray-800">
-          <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-              <h2 class="text-3xl font-bold text-slate-800 dark:text-white">Our Educational Philosophy</h2>
-              <p class="mt-4 text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">We believe in a science-first approach that blends rock-solid academics with the spark of curiosity.</p>
-            </div>
-            <div class="grid md:grid-cols-3 gap-8">${philHTML}</div>
-          </div>
-        </section>
-        <section class="py-16">
-          <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-              <h2 class="text-3xl font-bold text-slate-800 dark:text-white">Our Journey So Far</h2>
-              <p class="mt-4 text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">From a bold idea to building the next generation of scientists.</p>
-            </div>
-            <div class="timeline">${timelineHTML}</div>
-          </div>
-        </section>
-      `;
-    }
-
-    function renderCourses() {
-      const courses = DATA.courses;
-      // Simplified category filter buttons (static)
-      const categories = ['all', 'ug-pg-entrance', 'college-entrance', 'research-methods'];
-      const categoryLabels = { all: 'All Courses', 'ug-pg-entrance': 'UG/PG Entrance', 'college-entrance': 'College Entrance', 'research-methods': 'Research Methods' };
-      // We'll just show all courses with a simple filter UI (client-side filter will be added via JS)
-      const courseCards = courses.map(c => {
-        const discount = c.originalPrice && c.discountedPrice ? Math.round((parseFloat(c.originalPrice.replace(/[₹,]/g,'')) - parseFloat(c.discountedPrice.replace(/[₹,]/g,''))) / parseFloat(c.originalPrice.replace(/[₹,]/g,'')) * 100) : 0;
-        const tags = c.tags ? c.tags.map(t => `<span class="text-xs font-medium px-2.5 py-0.5 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200">${t}</span>`).join(' ') : '';
-        return `
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 overflow-hidden h-full flex flex-col">
-            <div class="relative overflow-hidden">
-              <img src="${c.image}" alt="${c.title}" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
-              ${c.featured ? `<div class="absolute top-3 right-3 bg-yellow-400 text-gray-900 text-xs font-bold px-3 py-1 rounded-full">⭐ FEATURED</div>` : ''}
-              ${c.recent ? `<div class="absolute top-3 left-3 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full">⚡ RECENT</div>` : ''}
-            </div>
-            <div class="p-5 flex flex-col flex-grow">
-              <h3 class="text-lg font-bold text-slate-800 dark:text-white mb-2">${c.title}</h3>
-              <div class="mb-4 flex flex-wrap gap-2">${tags}</div>
-              <div class="mt-auto pt-4 border-t border-slate-200 dark:border-gray-700">
-                <div class="flex justify-between items-center mb-4">
-                  <div class="flex items-baseline gap-2">
-                    <p class="text-2xl font-extrabold text-slate-800 dark:text-white">${c.discountedPrice || c.price}</p>
-                    ${c.originalPrice ? `<p class="text-sm text-slate-500 dark:text-slate-400 line-through">${c.originalPrice}</p>` : ''}
-                  </div>
-                  ${discount > 0 ? `<div class="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">${discount}% OFF</div>` : ''}
-                </div>
-                <a href="${c.link || '#'}" class="block w-full bg-green-700 hover:bg-green-800 text-white font-semibold px-6 py-3 rounded-lg text-center transition">Get This Course</a>
-              </div>
-            </div>
-          </div>
-        `;
-      }).join('');
-
-      return `
-        <section class="relative bg-white dark:bg-gray-800 pt-24 pb-16">
-          <div class="container mx-auto px-4 text-center">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 dark:text-white tracking-tight">Find Your Path to Scientific Excellence</h1>
-            <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-300">Explore our comprehensive programs designed for success in science and research.</p>
-          </div>
-        </section>
-        <div class="sticky top-20 z-40 bg-slate-50/80 dark:bg-gray-900/80 backdrop-blur-lg border-b border-slate-200 dark:border-gray-700 py-6">
-          <div class="container mx-auto px-4">
-            <div class="flex justify-center flex-wrap gap-3 mb-5">
-              <button class="category-filter px-4 py-2 text-sm font-semibold rounded-full bg-green-800 text-white shadow-lg" data-category="all">📚 All Courses</button>
-              <button class="category-filter px-4 py-2 text-sm font-semibold rounded-full bg-white dark:bg-gray-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-gray-600" data-category="ug-pg-entrance">🎓 UG/PG Entrance</button>
-              <button class="category-filter px-4 py-2 text-sm font-semibold rounded-full bg-white dark:bg-gray-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-gray-600" data-category="college-entrance">🏫 College Entrance</button>
-              <button class="category-filter px-4 py-2 text-sm font-semibold rounded-full bg-white dark:bg-gray-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-gray-600" data-category="research-methods">🔬 Research Methods</button>
-            </div>
-          </div>
-        </div>
-        <main class="container mx-auto px-4 py-12">
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" id="courseGrid">
-            ${courseCards}
-          </div>
-        </main>
-      `;
-    }
-
-    function renderTeam() {
-      const founders = DATA.founders;
-      const mentors = DATA.mentors;
-
-      const foundersHTML = founders.map(m => `
-        <div class="group relative bg-slate-50 dark:bg-gray-800 rounded-lg overflow-hidden text-center">
-          <div class="relative pt-[100%]">
-            <img src="${m.image}" alt="${m.name}" class="absolute top-0 left-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-            <div class="absolute inset-x-0 bottom-0 p-4">
-              <h3 class="text-xl font-bold text-white">${m.name}</h3>
-              <p class="text-sm text-slate-300">${m.designation}</p>
-            </div>
-          </div>
-          <div class="absolute inset-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm p-6 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            <div class="space-y-3 text-sm text-slate-700 dark:text-slate-200">
-              <p>🎓 ${m.education}</p>
-              <p>💼 ${m.experience} Experience</p>
-            </div>
-            <a href="${m.linkedin}" target="_blank" class="mt-4 inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-600 text-white hover:bg-slate-700">🔗</a>
-          </div>
-        </div>
-      `).join('');
-
-      const mentorsHTML = mentors.map(m => `
-        <div class="group relative bg-white dark:bg-gray-900 rounded-lg overflow-hidden text-center">
-          <div class="relative pt-[100%]">
-            <img src="${m.image}" alt="${m.name}" class="absolute top-0 left-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-            <div class="absolute inset-x-0 bottom-0 p-4">
-              <h3 class="text-lg font-bold text-white">${m.name}</h3>
-              <p class="text-sm text-slate-300">${m.specialization}</p>
-            </div>
-          </div>
-          <div class="absolute inset-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm p-4 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            <div class="space-y-2 text-sm text-slate-700 dark:text-slate-200">
-              <p>🎓 ${m.education}</p>
-              <p>💼 ${m.experience} Experience</p>
-            </div>
-            <a href="${m.linkedin}" target="_blank" class="mt-3 inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-600 text-white hover:bg-slate-700">🔗</a>
-          </div>
-        </div>
-      `).join('');
-
-      return `
-        <section class="relative bg-slate-50 dark:bg-gray-800 pt-24 pb-16">
-          <div class="container mx-auto px-4 text-center">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 dark:text-white tracking-tight">Meet Our Team</h1>
-            <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-300">The passionate educators and researchers dedicated to making Scigeeks a center of excellence in science education.</p>
-          </div>
-        </section>
-        <section class="py-16">
-          <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-slate-800 dark:text-white mb-12">The Founders</h2>
-            <h3 class="text-2xl font-bold text-center text-slate-800 dark:text-white mb-12">A Team of Perfectionists in Pedagogy</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">${foundersHTML}</div>
-          </div>
-        </section>
-        <section class="py-16 bg-slate-50 dark:bg-gray-800">
-          <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-slate-800 dark:text-white mb-12">Our Mentors</h2>
-            <h3 class="text-2xl font-bold text-center text-slate-800 dark:text-white mb-12">A Team of Geeky Scientists</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">${mentorsHTML}</div>
-          </div>
-        </section>
-      `;
-    }
-
-    function renderResearchInstitutes() {
-      const institutes = DATA.researchInstitutes;
-      const html = institutes.map(inst => `
-        <div class="bg-slate-50 dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden h-full flex flex-col">
-          <div class="p-6">
-            <div class="flex items-center gap-6 mb-4">
-              <div><img src="${inst.logo}" alt="${inst.name}" class="h-20 w-20 rounded-md object-contain bg-white p-1" /></div>
-              <div>
-                <h2 class="text-2xl font-bold text-slate-800 dark:text-white">${inst.name}</h2>
-                <div class="flex items-center text-sm text-slate-500 dark:text-slate-400 mt-1">📍 ${inst.location}</div>
-              </div>
-            </div>
-            <p class="text-slate-600 dark:text-slate-300 text-sm">${inst.description}</p>
-            <div class="border-t border-b border-slate-200 dark:border-gray-700 py-3 my-3">
-              <h4 class="font-semibold text-slate-700 dark:text-slate-200 text-sm">Key Programs</h4>
-              <div class="flex flex-wrap gap-2 mt-1">${inst.courses.map(c => `<span class="bg-slate-200 dark:bg-gray-700 text-slate-600 dark:text-slate-300 text-xs px-2.5 py-1 rounded-full">${c}</span>`).join('')}</div>
-            </div>
-            <div><h4 class="font-semibold text-slate-700 dark:text-slate-200 text-sm">Admission Insight</h4><p class="text-slate-600 dark:text-slate-300 text-sm">${inst.examInfo}</p></div>
-          </div>
-          <div class="mt-auto bg-white dark:bg-gray-800/50 p-4 border-t border-slate-200 dark:border-gray-700 flex justify-between items-center">
-            <div class="text-sm text-slate-500 dark:text-slate-400">📅 Est. ${inst.established}</div>
-            <a href="${inst.website}" target="_blank" class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900">Visit Website →</a>
-          </div>
-        </div>
-      `).join('');
-
-      return `
-        <section class="relative bg-slate-50 dark:bg-gray-800 pt-24 pb-16">
-          <div class="container mx-auto px-4 text-center">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 dark:text-white tracking-tight">Top Research Institutes</h1>
-            <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-300">Explore the leading institutions we help you to get enrolled in</p>
-          </div>
-        </section>
-        <section class="py-16">
-          <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-2 gap-8">${html}</div>
-          </div>
-        </section>
-        <section class="bg-green-50 dark:bg-gray-800 py-16 text-center">
-          <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-slate-800">Ready to Prepare for Your Dream Institute?</h2>
-            <p class="mt-4 text-slate-700 max-w-2xl mx-auto">Our specialized courses are designed to give you the competitive edge.</p>
-            <a href="#" data-link="/courses" class="mt-8 inline-block bg-white text-slate-800 font-semibold px-8 py-3 rounded-md hover:bg-slate-200">View Preparation Courses</a>
-          </div>
-        </section>
-      `;
-    }
-
-    function renderBlogList() {
-      const posts = DATA.blogPosts;
-      const html = posts.map(p => `
-        <div class="group">
-          <div class="overflow-hidden rounded-lg shadow-lg">
-            <a href="#" data-link="/blogs/${p.slug}">
-              <img src="${p.image}" alt="${p.title}" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" />
-            </a>
-          </div>
-          <div class="mt-6">
-            <div class="flex items-center gap-4 text-sm text-slate-500 dark:text-slate-400 mb-2">
-              <span>👤 ${p.author}</span>
-              <span>📅 ${p.date}</span>
-            </div>
-            <h2 class="text-2xl font-bold text-slate-800 dark:text-white mb-2">
-              <a href="#" data-link="/blogs/${p.slug}" class="hover:text-slate-600 dark:hover:text-slate-300">${p.title}</a>
-            </h2>
-            <p class="text-slate-600 dark:text-slate-400 mb-4">${p.excerpt}</p>
-            <a href="#" data-link="/blogs/${p.slug}" class="inline-flex items-center gap-2 font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900">Read More →</a>
-          </div>
-        </div>
-      `).join('');
-
-      return `
-        <section class="relative bg-slate-50 dark:bg-gray-800 pt-24 pb-16">
-          <div class="container mx-auto px-4 text-center">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 dark:text-white tracking-tight">The SciGeeks Blog</h1>
-            <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-300">Insights, strategies, and stories from the forefront of science education and research.</p>
-          </div>
-        </section>
-        <section class="py-16">
-          <div class="container mx-auto px-4">
-            <div class="grid lg:grid-cols-2 gap-12">${html}</div>
-          </div>
-        </section>
-      `;
-    }
-
-    function renderBlogPost() {
-      const slug = getSlugFromPath();
-      const post = DATA.blogPosts.find(p => p.slug === slug);
-      if (!post) return render404();
-      return `
-        <div class="container mx-auto px-4 py-16 sm:py-24">
-          <div class="max-w-3xl mx-auto">
-            <a href="#" data-link="/blog-posts" class="inline-flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 mb-8">← Back to All Blogs</a>
-            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 dark:text-white tracking-tight mb-4">${post.title}</h1>
-            <div class="flex items-center gap-6 text-slate-500 dark:text-slate-400 mb-8">
-              <span>👤 ${post.author}</span>
-              <span>📅 ${post.date}</span>
-            </div>
-            <img src="${post.image}" alt="${post.title}" class="w-full h-auto rounded-lg shadow-lg mb-8" />
-            <div class="prose dark:prose-invert prose-lg max-w-none">${post.content}</div>
-          </div>
-        </div>
-      `;
-    }
-
-    function renderCommunity() {
-      return `
-        <section class="relative bg-green-50 dark:bg-gray-800 pt-24 pb-16">
-          <div class="container mx-auto px-4 text-center">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 tracking-tight">Join the SciGeeks <span class="text-green-600">Community</span></h1>
-            <p class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mt-4">Connect with fellow science enthusiasts, share knowledge, collaborate on projects, and grow together.</p>
-          </div>
-        </section>
-        <section class="py-16">
-          <div class="container mx-auto px-4">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-              <div><img src="community-img.png" alt="Community" class="rounded-lg shadow-2xl" /></div>
-              <div>
-                <h2 class="text-3xl font-bold text-slate-800 dark:text-white mb-6">Where Science Geeks Unite</h2>
-                <p class="text-lg mb-4">The SciGeeks Community is more than just a group of people — it's a movement of passionate individuals.</p>
-                <p class="text-lg">Together, we're building a global network of science enthusiasts who support, inspire, and challenge each other.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section class="py-16 bg-slate-50 dark:bg-gray-800">
-          <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold text-slate-800 dark:text-white mb-12">Community Features</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-              <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg"><h3 class="text-xl font-semibold">💬 Discussion Forums</h3><p class="mt-2">Engage in deep conversations about science topics.</p></div>
-              <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg"><h3 class="text-xl font-semibold">👥 Study Groups</h3><p class="mt-2">Form or join study groups to collaborate on projects.</p></div>
-              <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg"><h3 class="text-xl font-semibold">📅 Events & Meetups</h3><p class="mt-2">Attend virtual and in-person science events.</p></div>
-            </div>
-          </div>
-        </section>
-      `;
-    }
-
-    function renderAppDev() {
-      return `
-        <section class="relative bg-green-50 dark:bg-gray-800 pt-24 pb-16">
-          <div class="container mx-auto px-4 text-center">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 tracking-tight">The SciGeeks App - <span class="text-green-600">Revolutionizing Science Education</span></h1>
-            <p class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mt-4">Bringing the power of SciGeeks to your fingertips. An innovative mobile application designed to empower the next generation of geeky scientists.</p>
-          </div>
-        </section>
-        <section class="py-16">
-          <div class="container mx-auto px-4">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-              <div><img src="appMockup.jpg" alt="App Mockup" class="rounded-lg shadow-2xl" /></div>
-              <div>
-                <h2 class="text-3xl font-bold text-slate-800 dark:text-white mb-6">Personal science learning assistant in your pocket</h2>
-                <p class="text-lg mb-4">The SciGeeks App is more than just a learning tool — it's your personal laboratory in your pocket.</p>
-                <p class="text-lg">Whether you're preparing for competitive exams or simply exploring the wonders of science, the SciGeeks App adapts to your learning style.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section class="py-16 bg-slate-50 dark:bg-gray-800">
-          <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold text-slate-800 dark:text-white mb-12">Powerful Features for Future Scientists</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-              <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg"><h3 class="text-xl font-semibold">🤖 24×7 AI Mentorship</h3><p>Instant, context-aware guidance available anytime.</p></div>
-              <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg"><h3 class="text-xl font-semibold">📈 Adaptive Learning Engine</h3><p>Dynamically adjusts problem difficulty based on your progress.</p></div>
-              <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg"><h3 class="text-xl font-semibold">💡 Hint-First Tutoring</h3><p>Guided learning that strengthens reasoning.</p></div>
-            </div>
-          </div>
-        </section>
-      `;
-    }
-
-    function renderFreeTestPanel() {
-      // Check if user is logged in
-      const user = state.user;
-      const tests = [{ id: 'test1', title: 'Science Sample Test', totalQuestions: 3, duration: 5 }];
-      // For demo, we assume not attempted
-      const attempted = new Set(); // no attempts
-
-      const list = tests.map(test => `
-        <div class="bg-slate-50 dark:bg-gray-800 p-6 rounded-lg shadow flex flex-col sm:flex-row justify-between items-center gap-6">
-          <div class="flex items-center gap-4">
-            <div class="w-16 h-16 bg-slate-600 text-white flex items-center justify-center rounded-lg">📝</div>
-            <div>
-              <h2 class="text-xl font-bold">${test.title}</h2>
-              <div class="flex gap-4 text-sm text-slate-400 mt-1">
-                <span>❓ ${test.totalQuestions}</span>
-                <span>⏱ ${test.duration} mins</span>
-              </div>
-            </div>
-          </div>
-          ${!user ? `<button class="bg-gray-600 text-white px-6 py-3 rounded-md flex items-center gap-2" data-testid="${test.id}" onclick="requireAuth()">🔒 Login to Attempt</button>` :
-          attempted.has(test.id) ? `<button disabled class="bg-gray-500 text-white px-6 py-3 rounded-md cursor-not-allowed">🔒 Attempted</button>` :
-          `<a href="#" data-link="/test/instructions/${test.id}" class="bg-green-700 hover:bg-green-800 text-white px-6 py-3 rounded-md">▶ Attempt Test</a>`}
-        </div>
-      `).join('');
-
-      return `
-        <div class="min-h-screen bg-white dark:bg-gray-900 p-8">
-          <h1 class="text-4xl font-bold text-center mb-10 text-slate-800 dark:text-white">Free Assessment Tests</h1>
-          <div class="max-w-3xl mx-auto space-y-6">${list}</div>
-        </div>
-      `;
-    }
-
-    function renderTestInstructions() {
-      const testId = getSlugFromPath();
-      // For demo, we have only one test
-      const test = DATA.testDetails;
-      return `
-        <div class="min-h-screen bg-gray-900 flex items-center justify-center p-6">
-          <div class="max-w-3xl bg-gray-800 p-8 rounded-xl text-white">
-            <div class="text-center text-6xl mb-4">🛡️</div>
-            <h1 class="text-3xl font-bold text-center mb-6">${test.title}</h1>
-            <ul class="space-y-3 text-slate-300">
-              <li>⏱ Duration: ${test.duration} minutes</li>
-              <li>🔒 Single attempt only</li>
-              <li>⏰ Auto-submit on timer expiry</li>
-              <li>🚫 Do not refresh or close the tab</li>
-            </ul>
-            <label class="flex items-center justify-center mt-8 gap-3">
-              <input type="checkbox" id="agreeCheck" /> <span>I agree to the instructions</span>
-            </label>
-            <button id="startTestBtn" disabled class="mt-6 w-full py-3 rounded-lg font-bold bg-gray-600 cursor-not-allowed">✅ Start Test</button>
-          </div>
-        </div>
-      `;
-    }
-
-    function renderTestLive() {
-      // This will be a simplified test page
-      const testId = getSlugFromPath();
-      const questions = DATA.testQuestions;
-      const duration = DATA.testDetails.duration;
-
-      // We'll build a simple timer and question display with JS
-      return `
-        <div class="min-h-screen bg-gray-900 text-white p-6" id="testContainer">
-          <header class="flex justify-between items-center mb-6">
-            <h1 class="text-xl font-bold">${DATA.testDetails.title}</h1>
-            <div class="bg-red-500/20 px-4 py-2 rounded-lg flex items-center gap-2">
-              ⏱ <span id="timerDisplay">${duration}:00</span>
-            </div>
-          </header>
-          <div id="questionArea">
-            <!-- will be rendered by JS -->
-          </div>
-          <div class="mt-8 flex justify-between">
-            <button id="prevBtn" class="bg-gray-600 px-6 py-3 rounded-lg disabled:opacity-50" disabled>Previous</button>
-            <button id="nextBtn" class="bg-blue-600 px-6 py-3 rounded-lg flex items-center gap-2">Next →</button>
-          </div>
-        </div>
-      `;
-    }
-
-    function renderAuth() {
-      return `
-        <div class="min-h-screen flex items-center justify-center bg-gray-900 p-4">
-          <div class="w-full max-w-md bg-gray-800 shadow-2xl rounded-2xl p-8 border border-gray-700">
-            <div class="text-center mb-8">
-              <h1 class="text-2xl font-bold text-white">Welcome Back</h1>
-              <p class="text-slate-400 mt-2">Sign in to continue your journey.</p>
-            </div>
-            <form id="authForm" class="space-y-6">
-              <div class="relative">
-                <input type="email" id="authEmail" placeholder="Email Address" class="w-full pl-4 pr-4 py-3 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-slate-500 outline-none" required />
-              </div>
-              <div class="relative">
-                <input type="password" id="authPassword" placeholder="Password" class="w-full pl-4 pr-4 py-3 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-slate-500 outline-none" required />
-              </div>
-              <button type="submit" class="w-full bg-slate-600 text-white font-semibold py-3 rounded-lg hover:bg-slate-700 transition">Sign In</button>
-            </form>
-            <div class="text-center mt-6">
-              <p class="text-sm text-slate-400">Don't have an account? <a href="#" id="switchToRegister" class="font-semibold text-slate-300 hover:underline">Sign Up</a></p>
-              <a href="#" id="forgotPasswordLink" class="text-sm text-slate-400 hover:text-white mt-2 block">Forgot Password?</a>
-            </div>
-            <div class="flex items-center my-6">
-              <hr class="w-full border-gray-600" />
-              <span class="px-2 text-sm text-slate-400">OR</span>
-              <hr class="w-full border-gray-600" />
-            </div>
-            <button id="googleSignInBtn" class="w-full flex items-center justify-center gap-2 bg-gray-700 text-slate-300 font-semibold py-3 rounded-lg hover:bg-gray-600 transition">🔴 Continue with Google</button>
-            <div class="mt-4 text-center">
-              <a href="#" data-link="/" class="text-sm text-slate-500 hover:text-white">← Go back to Home Page</a>
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
-    function renderDashboard() {
-      const user = state.user;
-      if (!user) return renderAuth();
-      return `
-        <div class="min-h-screen bg-slate-50 dark:bg-gray-900 p-4 sm:p-6 lg:p-8">
-          <div class="container mx-auto max-w-4xl">
-            <div class="bg-white dark:bg-gray-800 shadow-2xl rounded-2xl overflow-hidden border border-slate-200 dark:border-gray-700">
-              <div class="h-28 bg-green-600"></div>
-              <div class="px-6 sm:px-8 -mt-12">
-                <div class="flex flex-col sm:flex-row items-center gap-6 mb-6">
-                  <div class="w-24 h-24 bg-slate-600 dark:bg-slate-400 rounded-full flex items-center justify-center text-white font-bold text-4xl border-4 border-white dark:border-gray-800 shadow-lg">${user.displayName ? user.displayName.charAt(0).toUpperCase() : 'U'}</div>
-                  <div class="text-center sm:text-left">
-                    <h1 class="text-2xl font-bold text-white">${user.displayName || 'User'}</h1>
-                    <p class="text-slate-500 dark:text-slate-400 mt-1">${user.email}</p>
-                  </div>
-                  <div class="sm:ml-auto flex gap-2">
-                    <a href="#" data-link="/" class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition">Home</a>
-                    <button id="logoutBtnDashboard" class="bg-red-600 text-white px-5 py-2 rounded-lg hover:bg-red-700 transition">Logout</button>
-                  </div>
-                </div>
-              </div>
-              <div class="px-6 sm:px-8 pb-8">
-                <div class="border-t border-slate-200 dark:border-gray-700 pt-6">
-                  <p class="text-slate-700 dark:text-slate-200">Phone: Not provided</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
-    function render404() {
-      return `
-        <div class="min-h-screen flex flex-col items-center justify-center bg-white dark:bg-gray-900 text-center px-4">
-          <div class="text-6xl mb-6">⚠️</div>
-          <h1 class="text-6xl font-extrabold text-slate-800 dark:text-white">404</h1>
-          <h2 class="text-2xl font-semibold text-slate-700 dark:text-slate-200 mt-2">Page Not Found</h2>
-          <a href="#" data-link="/" class="mt-8 inline-block bg-slate-600 text-white font-semibold px-8 py-3 rounded-md hover:bg-slate-700">Go Back Home</a>
-        </div>
-      `;
-    }
-
-    function renderContact() {
-      return `
-        <section class="relative bg-slate-50 dark:bg-gray-800 pt-24 pb-16">
-          <div class="container mx-auto px-4 text-center">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 dark:text-white tracking-tight">Get in Touch</h1>
-            <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-300">We're here to help with any questions about our courses, admissions, or career guidance.</p>
-          </div>
-        </section>
-        <section class="py-16">
-          <div class="container mx-auto px-4">
-            <div class="grid lg:grid-cols-2 gap-12">
-              <div>
-                <div class="flex items-start gap-4 mb-6"><span class="text-2xl">📍</span><div><h3 class="text-lg font-semibold">Address</h3><p class="text-slate-600 dark:text-slate-400">Flat-402, 3rd Floor, Anandamela Apartmrnt Bhatenda (West), Rajarhat Deara District, North 24 Parganas - 700135</p></div></div>
-                <div class="flex items-start gap-4 mb-6"><span class="text-2xl">📞</span><div><h3 class="text-lg font-semibold">Phone</h3><a href="tel:+917439430174" class="text-slate-600 dark:text-slate-400">+91 74394 30174</a></div></div>
-                <div class="flex items-start gap-4 mb-6"><span class="text-2xl">✉️</span><div><h3 class="text-lg font-semibold">Email</h3><a href="mailto:hello@scigeeks.in" class="text-slate-600 dark:text-slate-400">hello@scigeeks.in</a></div></div>
-                <div class="h-64 rounded-lg overflow-hidden shadow-lg mt-8 bg-gray-300 dark:bg-gray-700 flex items-center justify-center text-slate-500">Map placeholder</div>
-              </div>
-              <div class="bg-slate-50 dark:bg-gray-800 p-8 rounded-lg shadow-lg">
-                <h2 class="text-2xl font-bold text-slate-800 dark:text-white mb-6">Send Us a Message</h2>
-                <form id="contactForm" class="space-y-6">
-                  <div><label class="block text-sm font-medium mb-2">Full Name</label><input type="text" name="name" required class="w-full px-4 py-3 bg-white dark:bg-gray-700 border rounded-md" /></div>
-                  <div><label class="block text-sm font-medium mb-2">Email Address</label><input type="email" name="email" required class="w-full px-4 py-3 bg-white dark:bg-gray-700 border rounded-md" /></div>
-                  <div><label class="block text-sm font-medium mb-2">Phone Number</label><input type="text" name="phone" required class="w-full px-4 py-3 bg-white dark:bg-gray-700 border rounded-md" /></div>
-                  <div><label class="block text-sm font-medium mb-2">Message</label><textarea name="message" rows="5" required class="w-full px-4 py-3 bg-white dark:bg-gray-700 border rounded-md resize-none"></textarea></div>
-                  <button type="submit" class="w-full flex items-center justify-center gap-2 bg-slate-600 hover:bg-slate-700 text-white font-semibold px-6 py-3 rounded-md transition">✉️ Send Message</button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </section>
-      `;
-    }
-
-    // ============================== EVENT ATTACHMENTS ==============================
-    function attachPageEvents(path) {
-      // Handle dynamic events based on page
-      if (path === '/') {
-        const newsletterForm = document.getElementById('newsletterForm');
-        if (newsletterForm) {
-          newsletterForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('newsletterEmail').value;
-            if (email) {
-              showToast('Subscribed successfully! (Demo)');
-              this.reset();
-            }
-          });
-        }
-      }
-
-      if (path === '/courses') {
-        // Category filter
-        const filters = document.querySelectorAll('.category-filter');
-        const grid = document.getElementById('courseGrid');
-        if (filters.length && grid) {
-          filters.forEach(btn => {
-            btn.addEventListener('click', function() {
-              const cat = this.dataset.category;
-              // Update button styles
-              filters.forEach(b => b.classList.remove('bg-green-800', 'text-white', 'shadow-lg'));
-              this.classList.add('bg-green-800', 'text-white', 'shadow-lg');
-              // Filter courses
-              const allCourses = DATA.courses;
-              const filtered = cat === 'all' ? allCourses : allCourses.filter(c => c.category === cat);
-              // Re-render grid
-              grid.innerHTML = filtered.map(c => {
-                const discount = c.originalPrice && c.discountedPrice ? Math.round((parseFloat(c.originalPrice.replace(/[₹,]/g,'')) - parseFloat(c.discountedPrice.replace(/[₹,]/g,''))) / parseFloat(c.originalPrice.replace(/[₹,]/g,'')) * 100) : 0;
-                const tags = c.tags ? c.tags.map(t => `<span class="text-xs font-medium px-2.5 py-0.5 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200">${t}</span>`).join(' ') : '';
-                return `
-                  <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 overflow-hidden h-full flex flex-col">
-                    <div class="relative overflow-hidden">
-                      <img src="${c.image}" alt="${c.title}" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
-                      ${c.featured ? `<div class="absolute top-3 right-3 bg-yellow-400 text-gray-900 text-xs font-bold px-3 py-1 rounded-full">⭐ FEATURED</div>` : ''}
-                      ${c.recent ? `<div class="absolute top-3 left-3 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full">⚡ RECENT</div>` : ''}
-                    </div>
-                    <div class="p-5 flex flex-col flex-grow">
-                      <h3 class="text-lg font-bold text-slate-800 dark:text-white mb-2">${c.title}</h3>
-                      <div class="mb-4 flex flex-wrap gap-2">${tags}</div>
-                      <div class="mt-auto pt-4 border-t border-slate-200 dark:border-gray-700">
-                        <div class="flex justify-between items-center mb-4">
-                          <div class="flex items-baseline gap-2">
-                            <p class="text-2xl font-extrabold text-slate-800 dark:text-white">${c.discountedPrice || c.price}</p>
-                            ${c.originalPrice ? `<p class="text-sm text-slate-500 dark:text-slate-400 line-through">${c.originalPrice}</p>` : ''}
-                          </div>
-                          ${discount > 0 ? `<div class="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">${discount}% OFF</div>` : ''}
+                    <!-- Desktop Menu -->
+                    <div class="hidden md:flex items-center space-x-6">
+                        <a href="#" data-link="/" class="hover:text-gray-300 transition">Home</a>
+                        <a href="#" data-link="/courses" class="hover:text-gray-300 transition">Courses</a>
+                        <a href="#" data-link="/about" class="hover:text-gray-300 transition">About</a>
+                        <a href="#" data-link="/contact" class="hover:text-gray-300 transition">Contact</a>
+                        <div class="relative" id="moreDropdown">
+                            <button id="moreToggle" class="flex items-center gap-1 hover:text-gray-300 transition">
+                                More <span id="moreChevron" class="text-xs">▼</span>
+                            </button>
+                            <div id="moreMenu" class="absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded-md shadow-lg hidden">
+                                <a href="#" data-link="/team" class="block px-4 py-2 hover:bg-gray-100">Our Team</a>
+                                <a href="#" data-link="/research-institutes" class="block px-4 py-2 hover:bg-gray-100">Research Institutes</a>
+                                <a href="#" data-link="/blog-posts" class="block px-4 py-2 hover:bg-gray-100">Blogs</a>
+                                <a href="#" data-link="/community" class="block px-4 py-2 hover:bg-gray-100">Community</a>
+                                <a href="#" data-link="/scigeeksapp" class="block px-4 py-2 hover:bg-gray-100">The SciGeeks App</a>
+                            </div>
                         </div>
-                        <a href="${c.link || '#'}" class="block w-full bg-green-700 hover:bg-green-800 text-white font-semibold px-6 py-3 rounded-lg text-center transition">Get This Course</a>
-                      </div>
                     </div>
-                  </div>
-                `;
-              }).join('');
+
+                    <!-- Right Controls -->
+                    <div class="flex items-center gap-3">
+                        <button id="themeToggle" class="p-2 rounded-full hover:bg-gray-700 transition">🌙</button>
+                        <div id="authSection" class="flex items-center">
+                            <a href="#" data-link="/auth" id="authLink" class="hidden md:block bg-white text-primary px-5 py-2 rounded-full font-semibold hover:bg-gray-200 transition text-sm">Sign In</a>
+                            <div id="userMenu" class="hidden items-center gap-2">
+                                <button id="userAvatar" class="flex items-center justify-center w-8 h-8 rounded-full bg-green-600 text-white font-bold cursor-pointer">U</button>
+                                <button id="logoutBtn" class="p-2 rounded-full hover:bg-gray-700 transition">🚪</button>
+                            </div>
+                        </div>
+                        <button id="mobileMenuToggle" class="md:hidden p-2 text-2xl">☰</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="md:hidden bg-primary-dark border-t border-gray-700 hidden">
+                <nav class="flex flex-col p-4 space-y-2">
+                    <a href="#" data-link="/" class="block px-4 py-2 rounded hover:bg-gray-700">Home</a>
+                    <a href="#" data-link="/courses" class="block px-4 py-2 rounded hover:bg-gray-700">Courses</a>
+                    <a href="#" data-link="/about" class="block px-4 py-2 rounded hover:bg-gray-700">About</a>
+                    <a href="#" data-link="/contact" class="block px-4 py-2 rounded hover:bg-gray-700">Contact</a>
+                    <div class="border-t border-gray-700 my-2"></div>
+                    <a href="#" data-link="/team" class="block px-4 py-2 rounded hover:bg-gray-700">Our Team</a>
+                    <a href="#" data-link="/research-institutes" class="block px-4 py-2 rounded hover:bg-gray-700">Research Institutes</a>
+                    <a href="#" data-link="/blog-posts" class="block px-4 py-2 rounded hover:bg-gray-700">Blogs</a>
+                    <a href="#" data-link="/community" class="block px-4 py-2 rounded hover:bg-gray-700">Community</a>
+                    <a href="#" data-link="/scigeeksapp" class="block px-4 py-2 rounded hover:bg-gray-700">The SciGeeks App</a>
+                    <div class="border-t border-gray-700 my-2"></div>
+                    <a href="#" data-link="/auth" class="block px-4 py-2 rounded hover:bg-gray-700">Register / Login</a>
+                </nav>
+            </div>
+        </nav>
+
+        <!-- ==================== MAIN CONTENT ==================== -->
+        <main id="mainContent" class="flex-grow">
+            <!-- Pages will be injected here by JavaScript -->
+        </main>
+
+        <!-- ==================== FOOTER ==================== -->
+        <footer class="bg-primary text-white pt-16 pb-8">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4">SciGeeks</h3>
+                        <p class="text-gray-300 text-sm">Unraveling the Universe of Knowledge through innovative education and cutting-edge research.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold mb-4">Quick Links</h4>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li><a href="#" data-link="/" class="hover:text-white transition">Home</a></li>
+                            <li><a href="#" data-link="/about" class="hover:text-white transition">About Us</a></li>
+                            <li><a href="#" data-link="/courses" class="hover:text-white transition">Courses</a></li>
+                            <li><a href="#" data-link="/contact" class="hover:text-white transition">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold mb-4">Other Links</h4>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li><a href="#" data-link="/research-institutes" class="hover:text-white transition">Research Institutes</a></li>
+                            <li><a href="#" data-link="/team" class="hover:text-white transition">Our Team</a></li>
+                            <li><a href="#" data-link="/blog-posts" class="hover:text-white transition">Blogs</a></li>
+                            <li><a href="#" data-link="/community" class="hover:text-white transition">Community</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold mb-4">Contact Us</h4>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li>📍 Flat-402, 3rd Floor, Anandamela Apartment, Bhatenda (West), Rajarhat Deara District, North 24 Parganas – 700135</li>
+                            <li>📞 +91 74394 30174</li>
+                            <li>✉️ hello@scigeeks.in</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-12 pt-8 border-t border-gray-700 flex flex-col sm:flex-row justify-between items-center text-sm text-gray-400">
+                    <p>&copy; 2025 SciGeeks. All Rights Reserved. <button id="legalPolicyBtn" class="underline hover:text-white transition">Privacy Policy & Terms</button></p>
+                    <div class="flex space-x-4 mt-4 sm:mt-0">
+                        <a href="#" class="hover:text-white transition">📘</a>
+                        <a href="#" class="hover:text-white transition">📷</a>
+                        <a href="#" class="hover:text-white transition">🔗</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Legal Policy Modal -->
+        <div id="legalModal" class="fixed inset-0 z-50 bg-black/60 flex items-center justify-center px-4 hidden">
+            <div class="w-full max-w-4xl max-h-[80vh] bg-white dark:bg-gray-900 rounded-lg shadow-xl flex flex-col">
+                <div class="flex items-center justify-between px-6 py-4 border-b dark:border-gray-700">
+                    <h2 class="text-lg font-semibold text-gray-800 dark:text-white">Privacy Policy & Terms of Use</h2>
+                    <button id="closeLegalModal" class="text-gray-500 hover:text-gray-800 dark:hover:text-white text-2xl">&times;</button>
+                </div>
+                <div class="px-6 py-5 overflow-y-auto text-sm text-gray-600 dark:text-gray-300 space-y-6 leading-relaxed">
+                    <section><h3 class="text-base font-semibold text-gray-800 dark:text-white">Privacy Policy</h3><p>SciGeeks respects your privacy...</p></section>
+                    <section><h4 class="font-semibold">Information We Collect</h4><p>We may collect personal information...</p></section>
+                    <section><h4 class="font-semibold">Use of Information</h4><p>Collected data is used to provide educational services...</p></section>
+                    <section><h4 class="font-semibold">Analytics & Cookies</h4><p>We use analytics tools...</p></section>
+                    <section><h4 class="font-semibold">Data Security</h4><p>Reasonable safeguards are applied...</p></section>
+                    <section class="pt-4 border-t dark:border-gray-700"><h3 class="text-base font-semibold text-gray-800 dark:text-white">Terms & Conditions</h3><p>By using SciGeeks, you agree...</p></section>
+                    <section><h4 class="font-semibold">Platform Purpose</h4><p>SciGeeks is an educational platform...</p></section>
+                    <section><h4 class="font-semibold">User Responsibilities</h4><p>Users must not misuse...</p></section>
+                    <section><h4 class="font-semibold">Intellectual Property</h4><p>All content is the property...</p></section>
+                    <section><h4 class="font-semibold">Limitation of Liability</h4><p>SciGeeks shall not be liable...</p></section>
+                    <section><h4 class="font-semibold">Governing Law</h4><p>These terms are governed by the laws of India...</p></section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================== DATA ==============================
+        const DATA = {
+            stats: [
+                { value: '21+', label: 'Students Trained' },
+                { value: '8+', label: 'Courses Offered' },
+                { value: '40.56%', label: 'Success Rate' },
+                { value: '0+', label: 'Years of Experience' }
+            ],
+            featuredCourses: [
+                { title: "24*7 Hint First AI Mentoring & Adaptive Learning", description: "Get personalized AI-powered mentoring available round the clock with adaptive learning paths tailored to your pace.", image: "https://placehold.co/600x400/e2e8f0/475569?text=AI+Mentoring" },
+                { title: "Flagship All in One Course", description: "One Science for all Needs. Learn science like never before. Understand the core concepts from atoms to cells.", image: "https://placehold.co/600x400/e2e8f0/475569?text=All+in+One" },
+                { title: "Research Methods", description: "Advanced course on scientific research methods.", image: "https://placehold.co/600x400/e2e8f0/475569?text=Research+Methods" }
+            ],
+            institutes: [
+                { name: "ISI", logo: "https://placehold.co/100x100/e2e8f0/475569?text=ISI" },
+                { name: "CEBS", logo: "https://placehold.co/100x100/e2e8f0/475569?text=CEBS" },
+                { name: "IISER", logo: "https://placehold.co/100x100/e2e8f0/475569?text=IISER" },
+                { name: "IISc", logo: "https://placehold.co/100x100/e2e8f0/475569?text=IISc" }
+            ]
+        };
+
+        // ============================== STATE ==============================
+        const state = {
+            currentPage: '/',
+            user: null,
+            theme: 'light'
+        };
+
+        // ============================== UTILITY ==============================
+        function getElement(id) { return document.getElementById(id); }
+        function showToast(message) { alert(message); }
+
+        // ============================== ROUTER ==============================
+        function navigateTo(path) {
+            window.location.hash = path;
+            renderPage(path);
+        }
+
+        function getCurrentPath() {
+            return window.location.hash.slice(1) || '/';
+        }
+
+        // ============================== PAGE RENDERERS ==============================
+        function renderPage(path) {
+            const main = getElement('mainContent');
+            if (!main) return;
+            let content = '';
+            switch (path) {
+                case '/': content = renderHome(); break;
+                case '/about': content = renderAbout(); break;
+                case '/courses': content = renderCourses(); break;
+                case '/contact': content = renderContact(); break;
+                case '/team': content = renderTeam(); break;
+                case '/research-institutes': content = renderResearchInstitutes(); break;
+                case '/blog-posts': content = renderBlogList(); break;
+                case '/community': content = renderCommunity(); break;
+                case '/scigeeksapp': content = renderAppDev(); break;
+                case '/freetestpanel': content = renderFreeTestPanel(); break;
+                case '/auth': content = renderAuth(); break;
+                case '/dashboard/user/:userId': content = renderDashboard(); break;
+                default: content = render404();
+            }
+            main.innerHTML = content;
+            window.scrollTo(0, 0);
+            attachPageEvents(path);
+        }
+
+        // ----- HOME PAGE -----
+        function renderHome() {
+            const stats = DATA.stats.map(s => `
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-bold text-primary">${s.value}</div>
+                    <p class="text-sm text-gray-600">${s.label}</p>
+                </div>
+            `).join('');
+
+            const featured = DATA.featuredCourses.map(c => `
+                <div class="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition">
+                    <div class="overflow-hidden h-56">
+                        <img src="${c.image}" alt="${c.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">${c.title}</h3>
+                        <p class="text-gray-600 mb-4">${c.description}</p>
+                        <a href="#" data-link="/courses" class="font-semibold text-primary hover:text-primary-dark transition">Learn More →</a>
+                    </div>
+                </div>
+            `).join('');
+
+            const institutes = DATA.institutes;
+            const repeated = Array(8).fill(institutes).flat();
+            const carouselSlides = repeated.map((inst, i) => `
+                <div class="carousel-slide flex items-center justify-center p-2">
+                    <img src="${inst.logo}" alt="${inst.name}" class="max-h-full max-w-full object-contain" />
+                </div>
+            `).join('');
+
+            return `
+                <!-- Hero Section -->
+                <section class="relative min-h-screen flex items-center justify-center text-white overflow-hidden bg-primary">
+                    <div class="absolute inset-0 bg-black/30 z-10"></div>
+                    <div class="relative z-20 container mx-auto px-4 text-center">
+                        <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">Join India’s #1 AI powered <span class="text-green-400">Science</span> Learning Platform</h1>
+                        <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-200 mb-8">For the ones who live and breathe science this is your turf. <br /><span class="text-3xl font-bold bg-green-600 rounded-xl px-2">SciGeeks</span> is India’s research-first science learning platform built around one unified, concept-driven course that teaches science at its core for any and every exams. Designed for tomorrows scientists.</p>
+                        <div class="flex flex-col sm:flex-row justify-center gap-4">
+                            <a href="#" data-link="/courses" class="inline-flex items-center justify-center gap-2 bg-white text-primary font-semibold px-8 py-3 rounded-full hover:bg-gray-200 transition">Explore Courses →</a>
+                            <a href="#" data-link="/freetestpanel" class="inline-flex items-center justify-center gap-2 bg-white text-primary font-semibold px-8 py-3 rounded-full hover:bg-gray-200 transition">Give a Free Test →</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Stats Section -->
+                <section class="py-16 bg-primary-light">
+                    <div class="container mx-auto px-4">
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">${stats}</div>
+                    </div>
+                </section>
+
+                <!-- Featured Courses -->
+                <section class="py-16 bg-gray-50">
+                    <div class="container mx-auto px-4">
+                        <div class="text-center mb-12">
+                            <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Explore Our Premier Courses</h2>
+                            <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">Kickstart your scientific journey with our most popular and comprehensive programs.</p>
+                        </div>
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">${featured}</div>
+                    </div>
+                </section>
+
+                <!-- Research Institutes Carousel -->
+                <section class="py-16 bg-primary-light">
+                    <div class="container mx-auto px-4 text-center">
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Top Research Institutes We can AIM for</h2>
+                        <p class="text-lg text-gray-600 mb-12">From geek mode to peak mode – your journey starts here</p>
+                    </div>
+                    <div class="carousel-container relative w-full overflow-hidden">
+                        <div class="carousel-track flex">${carouselSlides}</div>
+                    </div>
+                </section>
+
+                <!-- Newsletter Section -->
+                <section class="py-16 bg-primary text-white">
+                    <div class="container mx-auto px-4 text-center">
+                        <h2 class="text-3xl font-bold mb-4">Stay Ahead of the Curve</h2>
+                        <p class="text-gray-300 mb-8 max-w-2xl mx-auto">Subscribe to our newsletter for the latest courses, research updates, and educational insights delivered to your inbox.</p>
+                        <form id="newsletterForm" class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
+                            <input type="email" id="newsletterEmail" placeholder="Enter your email address" class="w-full px-4 py-3 rounded-full text-gray-800 bg-white focus:ring-2 focus:ring-green-500" required />
+                            <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-full transition">Subscribe</button>
+                        </form>
+                    </div>
+                </section>
+            `;
+        }
+
+        // ----- OTHER PAGES (simplified) -----
+        function renderAbout() { return `<div class="container mx-auto px-4 py-16"><h1 class="text-4xl font-bold">About Us</h1><p class="mt-4">This is the about page.</p></div>`; }
+        function renderCourses() { return `<div class="container mx-auto px-4 py-16"><h1 class="text-4xl font-bold">Courses</h1><p class="mt-4">Explore our courses here.</p></div>`; }
+        function renderContact() { return `<div class="container mx-auto px-4 py-16"><h1 class="text-4xl font-bold">Contact</h1><p class="mt-4">Get in touch with us.</p></div>`; }
+        function renderTeam() { return `<div class="container mx-auto px-4 py-16"><h1 class="text-4xl font-bold">Our Team</h1><p class="mt-4">Meet our team members.</p></div>`; }
+        function renderResearchInstitutes() { return `<div class="container mx-auto px-4 py-16"><h1 class="text-4xl font-bold">Research Institutes</h1><p class="mt-4">Information about research institutes.</p></div>`; }
+        function renderBlogList() { return `<div class="container mx-auto px-4 py-16"><h1 class="text-4xl font-bold">Blogs</h1><p class="mt-4">Read our latest blogs.</p></div>`; }
+        function renderCommunity() { return `<div class="container mx-auto px-4 py-16"><h1 class="text-4xl font-bold">Community</h1><p class="mt-4">Join our community.</p></div>`; }
+        function renderAppDev() { return `<div class="container mx-auto px-4 py-16"><h1 class="text-4xl font-bold">The SciGeeks App</h1><p class="mt-4">Learn about our app.</p></div>`; }
+        function renderFreeTestPanel() { return `<div class="container mx-auto px-4 py-16"><h1 class="text-4xl font-bold">Free Tests</h1><p class="mt-4">Attempt free tests here.</p></div>`; }
+        function renderAuth() { return `<div class="container mx-auto px-4 py-16"><h1 class="text-4xl font-bold">Authentication</h1><p class="mt-4">Sign in or create an account.</p></div>`; }
+        function renderDashboard() { return `<div class="container mx-auto px-4 py-16"><h1 class="text-4xl font-bold">Dashboard</h1><p class="mt-4">User dashboard.</p></div>`; }
+        function render404() { return `<div class="container mx-auto px-4 py-16 text-center"><h1 class="text-6xl font-bold">404</h1><p class="mt-4">Page not found.</p></div>`; }
+
+        // ============================== EVENT ATTACHMENTS ==============================
+        function attachPageEvents(path) {
+            if (path === '/') {
+                const form = document.getElementById('newsletterForm');
+                if (form) {
+                    form.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        const email = document.getElementById('newsletterEmail').value;
+                        if (email) {
+                            showToast('Subscribed successfully! (Demo)');
+                            this.reset();
+                        }
+                    });
+                }
+            }
+        }
+
+        // ============================== NAVIGATION HELPERS ==============================
+        function updateActiveLinks(path) {
+            document.querySelectorAll('[data-link]').forEach(link => {
+                link.classList.toggle('active', link.getAttribute('data-link') === path);
             });
-          });
         }
-      }
 
-      if (path === '/test/instructions/:testId') {
-        const agreeCheck = document.getElementById('agreeCheck');
-        const startBtn = document.getElementById('startTestBtn');
-        if (agreeCheck && startBtn) {
-          agreeCheck.addEventListener('change', function() {
-            startBtn.disabled = !this.checked;
-            startBtn.className = this.checked ? 'mt-6 w-full py-3 rounded-lg font-bold bg-green-600 hover:bg-green-700 text-white' : 'mt-6 w-full py-3 rounded-lg font-bold bg-gray-600 cursor-not-allowed';
-          });
-          startBtn.addEventListener('click', function() {
-            if (!this.disabled) {
-              navigateTo('/test/live/' + getSlugFromPath());
+        // ============================== THEME TOGGLE ==============================
+        function initTheme() {
+            const saved = localStorage.getItem('scigeeks-theme') || 'light';
+            state.theme = saved;
+            applyTheme(saved);
+            const toggle = document.getElementById('themeToggle');
+            if (toggle) {
+                toggle.textContent = saved === 'light' ? '🌙' : '☀️';
+                toggle.addEventListener('click', function() {
+                    const newTheme = state.theme === 'light' ? 'dark' : 'light';
+                    state.theme = newTheme;
+                    applyTheme(newTheme);
+                    localStorage.setItem('scigeeks-theme', newTheme);
+                    this.textContent = newTheme === 'light' ? '🌙' : '☀️';
+                });
             }
-          });
         }
-      }
 
-      if (path === '/test/live/:testId') {
-        // Initialize test
-        initTest();
-      }
-
-      if (path === '/auth') {
-        const form = document.getElementById('authForm');
-        if (form) {
-          form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('authEmail').value;
-            const password = document.getElementById('authPassword').value;
-            // Simulate login
-            if (email && password) {
-              // Store user in state and localStorage
-              const user = { uid: 'user123', email, displayName: email.split('@')[0], emailVerified: true };
-              state.user = user;
-              localStorage.setItem('scigeeks_user', JSON.stringify(user));
-              showToast('Logged in successfully!');
-              navigateTo('/');
-            }
-          });
-        }
-        const switchBtn = document.getElementById('switchToRegister');
-        if (switchBtn) {
-          switchBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            // Toggle form: we'll just change heading and button text
-            const form = document.getElementById('authForm');
-            const heading = document.querySelector('.text-2xl.font-bold.text-white');
-            const subtext = document.querySelector('.text-slate-400.mt-2');
-            if (heading.innerText === 'Welcome Back') {
-              heading.innerText = 'Create Your Account';
-              subtext.innerText = 'Join the SciGeeks community.';
-              this.innerText = 'Sign In';
-              document.querySelector('#authForm button').innerText = 'Create Account';
+        function applyTheme(theme) {
+            const root = document.documentElement;
+            if (theme === 'dark') {
+                root.classList.add('dark');
+                document.getElementById('app').classList.add('dark:bg-gray-900', 'dark:text-gray-200');
             } else {
-              heading.innerText = 'Welcome Back';
-              subtext.innerText = 'Sign in to continue your journey.';
-              this.innerText = 'Sign Up';
-              document.querySelector('#authForm button').innerText = 'Sign In';
+                root.classList.remove('dark');
+                document.getElementById('app').classList.remove('dark:bg-gray-900', 'dark:text-gray-200');
             }
-          });
         }
-      }
 
-      if (path === '/dashboard/user/:userId') {
-        const logoutBtn = document.getElementById('logoutBtnDashboard');
-        if (logoutBtn) {
-          logoutBtn.addEventListener('click', function() {
-            state.user = null;
-            localStorage.removeItem('scigeeks_user');
-            showToast('Logged out');
-            navigateTo('/');
-          });
+        // ============================== AUTH STATE ==============================
+        function initAuth() {
+            const stored = localStorage.getItem('scigeeks_user');
+            if (stored) {
+                try { state.user = JSON.parse(stored); } catch(e) {}
+            }
+            updateAuthUI();
         }
-      }
 
-      // Contact form
-      if (path === '/contact') {
-        const contactForm = document.getElementById('contactForm');
-        if (contactForm) {
-          contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            showToast('Message sent! (Demo)');
-            this.reset();
-          });
+        function updateAuthUI() {
+            const user = state.user;
+            const authLink = document.getElementById('authLink');
+            const userMenu = document.getElementById('userMenu');
+            const userAvatar = document.getElementById('userAvatar');
+            if (user) {
+                if (authLink) authLink.style.display = 'none';
+                if (userMenu) {
+                    userMenu.classList.remove('hidden');
+                    userMenu.classList.add('flex');
+                }
+                if (userAvatar) userAvatar.textContent = user.displayName ? user.displayName.charAt(0).toUpperCase() : 'U';
+            } else {
+                if (authLink) authLink.style.display = 'block';
+                if (userMenu) {
+                    userMenu.classList.add('hidden');
+                    userMenu.classList.remove('flex');
+                }
+            }
         }
-      }
-    }
 
-    // ============================== TEST LOGIC ==============================
-    let testState = null;
+        // ============================== ROUTER INIT ==============================
+        function initRouter() {
+            window.addEventListener('hashchange', function() {
+                const path = getCurrentPath();
+                renderPage(path);
+                updateAuthUI();
+                updateActiveLinks(path);
+            });
 
-    function initTest() {
-      const questions = DATA.testQuestions;
-      let currentIndex = 0;
-      let answers = {};
-      let timeLeft = DATA.testDetails.duration * 60; // seconds
+            document.addEventListener('click', function(e) {
+                const link = e.target.closest('[data-link]');
+                if (link) {
+                    e.preventDefault();
+                    navigateTo(link.getAttribute('data-link'));
+                }
+            });
 
-      const container = document.getElementById('testContainer');
-      if (!container) return;
-
-      const questionArea = document.getElementById('questionArea');
-      const prevBtn = document.getElementById('prevBtn');
-      const nextBtn = document.getElementById('nextBtn');
-      const timerDisplay = document.getElementById('timerDisplay');
-
-      function renderQuestion() {
-        const q = questions[currentIndex];
-        if (!q) return;
-        let optionsHTML = q.options.map(opt => `
-          <label class="block p-4 rounded-lg cursor-pointer ${answers[q.id] === opt ? 'bg-blue-600' : 'bg-gray-700'}">
-            <input type="radio" name="question" value="${opt}" ${answers[q.id] === opt ? 'checked' : ''} hidden />
-            ${opt}
-          </label>
-        `).join('');
-        questionArea.innerHTML = `
-          <h2 class="text-2xl mb-4">${q.question}</h2>
-          <div class="space-y-4">${optionsHTML}</div>
-        `;
-        // Attach radio change events
-        document.querySelectorAll('input[name="question"]').forEach(radio => {
-          radio.addEventListener('change', function() {
-            answers[q.id] = this.value;
-          });
-        });
-        // Update buttons
-        prevBtn.disabled = currentIndex === 0;
-        if (currentIndex === questions.length - 1) {
-          nextBtn.innerHTML = '✅ Submit';
-          nextBtn.className = 'bg-green-600 px-6 py-3 rounded-lg flex items-center gap-2';
-        } else {
-          nextBtn.innerHTML = 'Next →';
-          nextBtn.className = 'bg-blue-600 px-6 py-3 rounded-lg flex items-center gap-2';
+            const initialPath = getCurrentPath();
+            renderPage(initialPath);
+            updateActiveLinks(initialPath);
         }
-      }
 
-      function submitTest() {
-        // Calculate score
-        let score = 0;
-        questions.forEach(q => {
-          if (answers[q.id] === q.answer) score++;
-        });
-        clearInterval(testState.timerInterval);
-        showToast(`Test submitted! Score: ${score}/${questions.length}`);
-        navigateTo('/freetestpanel');
-      }
-
-      // Timer
-      const timerInterval = setInterval(() => {
-        timeLeft--;
-        const mins = Math.floor(timeLeft / 60);
-        const secs = timeLeft % 60;
-        timerDisplay.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
-        if (timeLeft <= 0) {
-          clearInterval(timerInterval);
-          submitTest();
+        // ============================== DROPDOWN & MOBILE MENU ==============================
+        function initMoreDropdown() {
+            const toggle = document.getElementById('moreToggle');
+            const menu = document.getElementById('moreMenu');
+            const chevron = document.getElementById('moreChevron');
+            if (toggle && menu) {
+                toggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    menu.classList.toggle('hidden');
+                    chevron.textContent = menu.classList.contains('hidden') ? '▼' : '▲';
+                });
+                document.addEventListener('click', function() {
+                    if (!menu.classList.contains('hidden')) {
+                        menu.classList.add('hidden');
+                        chevron.textContent = '▼';
+                    }
+                });
+            }
         }
-      }, 1000);
 
-      testState = { timerInterval, questions, answers, currentIndex };
-
-      // Event listeners
-      prevBtn.addEventListener('click', function() {
-        if (currentIndex > 0) {
-          currentIndex--;
-          renderQuestion();
+        function initMobileMenu() {
+            const toggle = document.getElementById('mobileMenuToggle');
+            const menu = document.getElementById('mobileMenu');
+            if (toggle && menu) {
+                toggle.addEventListener('click', function() {
+                    menu.classList.toggle('hidden');
+                    this.textContent = menu.classList.contains('hidden') ? '☰' : '✕';
+                });
+                menu.querySelectorAll('a[data-link]').forEach(link => {
+                    link.addEventListener('click', function() {
+                        menu.classList.add('hidden');
+                        toggle.textContent = '☰';
+                    });
+                });
+            }
         }
-      });
 
-      nextBtn.addEventListener('click', function() {
-        if (currentIndex === questions.length - 1) {
-          // Submit
-          submitTest();
-        } else {
-          currentIndex++;
-          renderQuestion();
+        // ============================== LEGAL MODAL ==============================
+        function initLegalModal() {
+            const btn = document.getElementById('legalPolicyBtn');
+            const modal = document.getElementById('legalModal');
+            const close = document.getElementById('closeLegalModal');
+            if (btn && modal && close) {
+                btn.addEventListener('click', () => modal.classList.remove('hidden'));
+                close.addEventListener('click', () => modal.classList.add('hidden'));
+                modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.add('hidden'); });
+            }
         }
-      });
 
-      // Initial render
-      renderQuestion();
-    }
-
-    // ============================== NAVIGATION HELPERS ==============================
-    function updateActiveLinks(path) {
-      document.querySelectorAll('[data-link]').forEach(link => {
-        const href = link.getAttribute('data-link');
-        // For blog posts, we need to handle dynamic
-        if (href === path) {
-          link.classList.add('active');
-        } else {
-          link.classList.remove('active');
+        // ============================== LOGOUT ==============================
+        function initLogout() {
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function() {
+                    state.user = null;
+                    localStorage.removeItem('scigeeks_user');
+                    updateAuthUI();
+                    showToast('Logged out');
+                    navigateTo('/');
+                });
+            }
         }
-      });
-    }
 
-    // ============================== THEME TOGGLE ==============================
-    function initTheme() {
-      const saved = localStorage.getItem('scigeeks-theme') || 'light';
-      state.theme = saved;
-      applyTheme(saved);
-      const toggle = document.getElementById('themeToggle');
-      if (toggle) {
-        toggle.textContent = saved === 'light' ? '🌙' : '☀️';
-        toggle.addEventListener('click', function() {
-          const newTheme = state.theme === 'light' ? 'dark' : 'light';
-          state.theme = newTheme;
-          applyTheme(newTheme);
-          localStorage.setItem('scigeeks-theme', newTheme);
-          this.textContent = newTheme === 'light' ? '🌙' : '☀️';
+        // ============================== START APP ==============================
+        document.addEventListener('DOMContentLoaded', function() {
+            initTheme();
+            initAuth();
+            initRouter();
+            initMoreDropdown();
+            initMobileMenu();
+            initLegalModal();
+            initLogout();
         });
-      }
-    }
-
-    function applyTheme(theme) {
-      const root = document.documentElement;
-      if (theme === 'dark') {
-        root.classList.add('dark');
-      } else {
-        root.classList.remove('dark');
-      }
-    }
-
-    // ============================== AUTH STATE ==============================
-    function initAuth() {
-      const stored = localStorage.getItem('scigeeks_user');
-      if (stored) {
-        try {
-          state.user = JSON.parse(stored);
-        } catch(e) {}
-      }
-      updateAuthUI();
-    }
-
-    function updateAuthUI() {
-      const user = state.user;
-      const authLink = document.getElementById('authLink');
-      const userMenu = document.getElementById('userMenu');
-      const userAvatar = document.getElementById('userAvatar');
-      if (user) {
-        if (authLink) authLink.style.display = 'none';
-        if (userMenu) {
-          userMenu.classList.remove('hidden');
-          userMenu.classList.add('flex');
-        }
-        if (userAvatar) userAvatar.textContent = user.displayName ? user.displayName.charAt(0).toUpperCase() : 'U';
-      } else {
-        if (authLink) authLink.style.display = 'flex';
-        if (userMenu) {
-          userMenu.classList.add('hidden');
-          userMenu.classList.remove('flex');
-        }
-      }
-    }
-
-    function requireAuth() {
-      if (!state.user) {
-        showToast('Please log in first.');
-        navigateTo('/auth');
-      }
-    }
-
-    // ============================== ROUTER INIT ==============================
-    function initRouter() {
-      // Handle hash changes
-      window.addEventListener('hashchange', function() {
-        const path = getCurrentPath();
-        renderPage(path);
-        updateAuthUI();
-        updateActiveLinks(path);
-      });
-
-      // Handle link clicks
-      document.addEventListener('click', function(e) {
-        const link = e.target.closest('[data-link]');
-        if (link) {
-          e.preventDefault();
-          const href = link.getAttribute('data-link');
-          // Check if it's a blog post link like /blogs/slug
-          if (href.startsWith('/blogs/')) {
-            navigateTo(href);
-          } else {
-            navigateTo(href);
-          }
-        }
-      });
-
-      // Initial load
-      const initialPath = getCurrentPath();
-      renderPage(initialPath);
-      updateActiveLinks(initialPath);
-    }
-
-    // ============================== MORE DROPDOWN ==============================
-    function initMoreDropdown() {
-      const toggle = document.getElementById('moreToggle');
-      const menu = document.getElementById('moreMenu');
-      const chevron = document.getElementById('moreChevron');
-      if (toggle && menu) {
-        toggle.addEventListener('click', function(e) {
-          e.stopPropagation();
-          menu.classList.toggle('hidden');
-          chevron.style.transform = menu.classList.contains('hidden') ? '' : 'rotate(180deg)';
-        });
-        document.addEventListener('click', function() {
-          if (!menu.classList.contains('hidden')) {
-            menu.classList.add('hidden');
-            chevron.style.transform = '';
-          }
-        });
-      }
-    }
-
-    // ============================== MOBILE MENU ==============================
-    function initMobileMenu() {
-      const toggle = document.getElementById('mobileMenuToggle');
-      const menu = document.getElementById('mobileMenu');
-      if (toggle && menu) {
-        toggle.addEventListener('click', function() {
-          menu.classList.toggle('hidden');
-          this.textContent = menu.classList.contains('hidden') ? '☰' : '✕';
-        });
-        // Close on link click
-        menu.querySelectorAll('a[data-link]').forEach(link => {
-          link.addEventListener('click', function() {
-            menu.classList.add('hidden');
-            toggle.textContent = '☰';
-          });
-        });
-      }
-    }
-
-    // ============================== LEGAL MODAL ==============================
-    function initLegalModal() {
-      const btn = document.getElementById('legalPolicyBtn');
-      const modal = document.getElementById('legalModal');
-      const close = document.getElementById('closeLegalModal');
-      if (btn && modal && close) {
-        btn.addEventListener('click', function() {
-          modal.classList.remove('hidden');
-        });
-        close.addEventListener('click', function() {
-          modal.classList.add('hidden');
-        });
-        modal.addEventListener('click', function(e) {
-          if (e.target === this) modal.classList.add('hidden');
-        });
-      }
-    }
-
-    // ============================== LOGOUT ==============================
-    function initLogout() {
-      const logoutBtn = document.getElementById('logoutBtn');
-      if (logoutBtn) {
-        logoutBtn.addEventListener('click', function() {
-          state.user = null;
-          localStorage.removeItem('scigeeks_user');
-          updateAuthUI();
-          showToast('Logged out');
-          navigateTo('/');
-        });
-      }
-    }
-
-    // ============================== START APP ==============================
-    document.addEventListener('DOMContentLoaded', function() {
-      initTheme();
-      initAuth();
-      initRouter();
-      initMoreDropdown();
-      initMobileMenu();
-      initLegalModal();
-      initLogout();
-    });
-  </script>
+    </script>
 </body>
 </html>
